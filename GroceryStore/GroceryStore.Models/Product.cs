@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,10 +20,10 @@ namespace GroceryStore.Models
        
         public double Price { get; set; }
 
-        public Product(string name, string category, double price)
+        public Product(string name,string categoryName, double price)
         {
             this.Name = name;
-            this.Category = category;
+            this.Category = categoryName;
             this.Price = price;
         }
         public override string ToString()
