@@ -4,57 +4,37 @@ namespace GroceryStore.Models
 {
     public class Customer
     {
-        //fields or properties
-        //private string FirstName;
-        //private string LastName;
-        //private int Age;
-        //private string Sex;
-        //private bool HasDiscountCard;
-        //private double PersonalDiscount;
 
-        //properties
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        //fields & properties
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
         public int Age { get; set; }
         public string Sex { get; set; }
         public bool HasDiscountCard { get; set; }
         public double PersonalDiscount { get; set; }
-        //    get
-        //    {
-        //        return this.HasDiscountCard ? this.PersonalDiscount : 0;
-        //    };
-        //    set;
-        //}
+        public string Fullname { get; set; }
 
-        string Cart { get; set; }   
-        //constructors with arguments   //
-        public Customer(string firstName, string lastName, int age, string sex, bool hasDiscountCard, double personalDiscount, string cart)
+        public string Cart { get; set; }
+
+
+        public Customer(string firstName, string lastName, int age, string sex, bool hasDiscountCard, double personalDiscount)
         {
-            this.FirstName = firstName;
-            this.LastName = lastName;
+            this.Firstname = firstName;
+            this.Lastname = lastName;
             this.Age = age;
             this.Sex = sex;
             this.HasDiscountCard = hasDiscountCard;
             this.PersonalDiscount = personalDiscount;
-            this.Cart = cart;
-        }
 
+        }
         public string GetFullName()
         {
-            return $"{this.FirstName} {this.LastName}";
+            return this.Firstname + " " + this.Lastname;
         }
-
-        /*public bool GetPersonalDiscount()
-        {
-            if (bool hasPersonalDiscount = false) {
-                double hasPersonalDiscount = 0
-                return { hasPersonalDiscount}
-            }
-        }*/
 
         public override string ToString()
         {
-            return $" {GetFullName()}, {Age}, {Sex}, {HasDiscountCard}, {PersonalDiscount}, {Cart}";
+            return $" {GetFullName()}, {Age}, {Sex}, {HasDiscountCard}, {PersonalDiscount}";
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace GroceryStore.Models
 {
     public class Product
@@ -14,7 +15,8 @@ namespace GroceryStore.Models
 
 
         public string Name { get; set; }
-        public string Category { get; set; }
+        public string Category {get; set;}  
+       
         public double Price { get; set; }
 
         public Product(string name, string category, double price)
@@ -22,6 +24,10 @@ namespace GroceryStore.Models
             this.Name = name;
             this.Category = category;
             this.Price = price;
+        }
+        public override string ToString()
+        {
+            return $" {Name}, {Category}, {Price}";
         }
 
     }

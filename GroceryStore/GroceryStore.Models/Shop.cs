@@ -8,11 +8,12 @@ namespace GroceryStore.Models
 {
     public class Shop
     {
-        string Customers;
-        string Products;
-        public void AddNewCustomer()
+        public string Customers;
+        public string Products;
+        
+        public void AddCustomer()
         {
-            
+                   
 
         }
     }
