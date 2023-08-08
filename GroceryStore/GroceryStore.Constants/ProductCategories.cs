@@ -2,7 +2,7 @@
 
 namespace GroceryStore.Constants;
 
-public class ProductCategories
+public static class ProductCategories
 {
     public enum Category
     {
@@ -12,9 +12,9 @@ public class ProductCategories
         Snacks,
         Drinks
     }
-    public static string SelectCategory(Category categoryName)
+    public static string SelectCategory(Category category)
     {
-        switch (categoryName)
+        switch (category)
         {
             case Category.FruitsAndVegetables:
                 {

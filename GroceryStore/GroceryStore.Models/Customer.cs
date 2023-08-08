@@ -11,37 +11,67 @@ namespace GroceryStore.Models
         public int Age { get; set; }
         public string Sex { get; set; }
         public bool HasDiscountCard { get; set; }
-        public double PersonalDiscount { 
+
+        private double personalDiscount;
+        public double PersonalDiscount
+        {
             get
             {
-                return (HasDiscountCard ? PersonalDiscount : 0);
+                return (HasDiscountCard ? personalDiscount : 0);
             }
-                set { PersonalDiscount = value; }
-            }
-        public string Fullname {
+            set { personalDiscount = value; }
+        }
+        public string Fullname
+        {
             get
             {
-                return this.FirstName + " " + this.LastName;
+                return FirstName + " " + LastName;
             }
         }
-        public List<Product>Cart { get; set; } 
-        
+        private string cart;
+        public string Cart
+        {
+            get
+            {
+                return (cart == null)? "EMPTY": "NOT EMPTY";
+            }
+            set
+            {
+                cart = value;
+            }
+        }
+
         public Customer(string firstName, string lastName, int age, string sex, bool hasDiscountCard, double personalDiscount)
         {
-            this.FirstName = firstName;
-            this.LastName = lastName;
-            this.Age = age;
-            this.Sex = sex;
-            this.HasDiscountCard = hasDiscountCard;
-            this.PersonalDiscount = personalDiscount;
+            FirstName = firstName;
+            LastName = lastName;
+            Age = age;
+            Sex = sex;
+            HasDiscountCard = hasDiscountCard;
+            PersonalDiscount = personalDiscount;
+            
         }
-        public string GetFullName()
+
+        public void UpdateName(string newFirstName, string newLastName)
         {
-            return this.FirstName + " " + this.LastName;
+            FirstName = newFirstName;
+            LastName = newLastName;
+        }
+
+        public void UpdateDiscount(bool hasDiscountCard)
+        {
+            HasDiscountCard = hasDiscountCard;
+
+        }
+        public void GetCustomerInfo()
+        {
+            Console.WriteLine("-------------------------------------------------");
+            string customerInfo = $"|    {Fullname} |  {Sex}  |  {HasDiscountCard}  | {PersonalDiscount}  | {Cart}   |";
+            Console.WriteLine(customerInfo);
         }
         public override string ToString()
         {
-            return $" {GetFullName()}, {Age}, {Sex}, {HasDiscountCard}, {PersonalDiscount}";
+            return $" {FirstName}, {LastName}, {Age}, {Sex}, {HasDiscountCard}, {PersonalDiscount}";
         }
     }
 }

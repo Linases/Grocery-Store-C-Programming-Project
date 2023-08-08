@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GroceryStore.Constants\GroceryStore.Constants.csproj" />
     <ProjectReference Include="..\GroceryStore.Models\GroceryStore.Models.csproj" />
   </ItemGroup>
 
