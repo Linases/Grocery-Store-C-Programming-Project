@@ -13,13 +13,25 @@ namespace GroceryStore.Models
         public bool HasDiscountCard { get; set; }
 
         private double personalDiscount;
+
         public double PersonalDiscount
         {
             get
             {
                 return (HasDiscountCard ? personalDiscount : 0);
             }
-            set { personalDiscount = value; }
+            set
+            {
+                personalDiscount = value;
+
+            }
+        }
+        public string PercentageAsString
+        {
+            get
+            {
+                return (personalDiscount * 100).ToString("0.##") + "%";
+            }
         }
         public string Fullname
         {
@@ -33,7 +45,7 @@ namespace GroceryStore.Models
         {
             get
             {
-                return (cart == null)? "EMPTY": "NOT EMPTY";
+                return (cart == null) ? "EMPTY" : "NOT EMPTY";
             }
             set
             {
@@ -49,7 +61,8 @@ namespace GroceryStore.Models
             Sex = sex;
             HasDiscountCard = hasDiscountCard;
             PersonalDiscount = personalDiscount;
-            
+           
+
         }
 
         public void UpdateName(string newFirstName, string newLastName)
@@ -66,12 +79,13 @@ namespace GroceryStore.Models
         public void GetCustomerInfo()
         {
             Console.WriteLine("-------------------------------------------------");
-            string customerInfo = $"|    {Fullname} |  {Sex}  |  {HasDiscountCard}  | {PersonalDiscount}  | {Cart}   |";
+
+            string customerInfo = $"|    {Fullname} |  {Sex}  |  {HasDiscountCard}  | {PercentageAsString}  | {Cart}   |";
             Console.WriteLine(customerInfo);
         }
         public override string ToString()
         {
-            return $" {FirstName}, {LastName}, {Age}, {Sex}, {HasDiscountCard}, {PersonalDiscount}";
+            return $" {FirstName}, {LastName}, {Age}, {Sex}, {HasDiscountCard}, {PercentageAsString}";
         }
     }
 }

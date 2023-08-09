@@ -20,18 +20,17 @@ public class Program
         Store.AddCustomer(c4);
         Store.AddCustomer(c5);
 
+        //Product p1 = new Product("Coca-cola", ProductCategories.Category.Drinks, 1.12);
+        //Product p2 = new Product("Tomatoes", ProductCategories.Category.FruitsAndVegetables, 0.99);
+        //Product p3 = new Product("Lay’s Cheese", ProductCategories.Category.Snacks, 2.49);
+        //Product p4 = new Product("Norway Herrin", ProductCategories.Category.Fish, 4.55);
 
-        Product p1 = new Product("Coca-cola", ProductCategories.Category.Drinks, 1.12);
-        Product p2 = new Product("Tomatoes", ProductCategories.Category.FruitsAndVegetables, 0.99);
-        Product p3 = new Product("Lay’s Cheese", ProductCategories.Category.Snacks, 2.49);
-        Product p4 = new Product("Norway Herrin", ProductCategories.Category.Fish, 4.55);
+        //Console.WriteLine(p1);
 
-        Console.WriteLine(p1);
-
-        c1.UpdateName("John", "Claus");
-        c4.UpdateDiscount(false);
-        c1.GetCustomerInfo();
-
+        //c1.UpdateName("John", "Claus");
+        //c4.UpdateDiscount(false);
+        //c1.GetCustomerInfo();
+        // Store.PrintCustomerInformation();
 
     }
 }
