@@ -6,19 +6,20 @@ public class Program
     public static void Main(string[] args)
     {
 
-        Customer c1 = new Customer("John", "Doe", 22, "M", true, 0.02);
-        Customer c2 = new Customer("Sam", "Brooks", 67, "F", true, 0.12);
-        Customer c3 = new Customer("Alois", "Winter", 15, "M", false, 0);
-        Customer c4 = new Customer("Ann", "Siememns", 44, "F", true, 0.09);
-        Customer c5 = new Customer("Peter", "Parker", 9, "M", false, 0);
+        //Customer c1 = new Customer("John", "Doe", 22, "M", true, 0.02);
+        //Customer c2 = new Customer("Sam", "Brooks", 67, "F", true, 0.12);
+        //Customer c3 = new Customer("Alois", "Winter", 15, "M", false, 0);
+        //Customer c4 = new Customer("Ann", "Siememns", 44, "F", true, 0.09);
+        //Customer c5 = new Customer("Peter", "Parker", 9, "M", false, 0);
 
-        Console.WriteLine(c1.ToString());
+        // Console.WriteLine(c1.ToString());
+        Store store = new Store(5);
 
-        Store.AddCustomer(c1);
-        Store.AddCustomer(c2);
-        Store.AddCustomer(c3);
-        Store.AddCustomer(c4);
-        Store.AddCustomer(c5);
+        store.AddCustomer("John", "Doe", 22, "M", true, 0.02);
+        store.AddCustomer("Sam", "Brooks", 67, "F", true, 0.12);
+        store.AddCustomer("Alois", "Winter", 15, "M", false, 0);
+        store.AddCustomer("Ann", "Siemens", 44, "F", true, 0.09);
+        store.AddCustomer("Peter", "Parker", 9, "M", false, 0);
 
         //Product p1 = new Product("Coca-cola", ProductCategories.Category.Drinks, 1.12);
         //Product p2 = new Product("Tomatoes", ProductCategories.Category.FruitsAndVegetables, 0.99);
@@ -27,12 +28,12 @@ public class Program
 
         //Console.WriteLine(p1);
 
-        //c1.UpdateName("John", "Claus");
-        //c4.UpdateDiscount(false);
-        //c1.GetCustomerInfo();
-        // Store.PrintCustomerInformation();
+        store.UpdateDiscountCard(false);
+        store.UpdateCustomerName("John Doe", "John", "Claus");
+        store.PrintCustomerInformation();
 
     }
-}
+    }
+
 
 

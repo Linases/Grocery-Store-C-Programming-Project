@@ -12,28 +12,30 @@ namespace GroceryStore.Models
 {
     public class Product
     {
-        //public string Name;
-        //public string Category;
-        //public double Price;
-
-
         public string Name { get; set; }
-        public ProductCategories.Category Category {get; set; }
+        public ProductCategories.Category Category { get; set; }
 
         public double Price { get; set; }
 
-        
-        public Product(string name, ProductCategories.Category categoryName, double price)
+        public int Amount { get; set; }
+
+
+        public Product(string name, ProductCategories.Category categoryName, double price, int amount)
         {
             this.Name = name;
             this.Category = categoryName;
             this.Price = price;
+            this.Amount = amount;
         }
 
-        public override string ToString()
+        public string GetProductInfo()
         {
-            return $" {Name}, {Category}, {Price}";
+            return $"({Category}) {Name} {Price}";
         }
+        //public override string ToString()
+        //{
+        //    return $" {Name}, {Category}, {Price}";
+        //}
 
     }
 }
