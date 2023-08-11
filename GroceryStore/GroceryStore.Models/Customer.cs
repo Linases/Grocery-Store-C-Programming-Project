@@ -2,14 +2,13 @@
 using System.Diagnostics;
 using System.Dynamic;
 using System.Globalization;
+using System.Transactions;
 using System.Xml.Linq;
 
 namespace GroceryStore.Models
 {
     public class Customer
     {
-
-        //fields & properties
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int Age { get; set; }
@@ -18,7 +17,6 @@ namespace GroceryStore.Models
         private bool _hasDiscountCard;
         public bool HasDiscountCard
         {
-
             get
             { return _hasDiscountCard; }
             set
@@ -31,9 +29,7 @@ namespace GroceryStore.Models
                 return _hasDiscountCard ? "Yes" : "No";
             }
         }
-
         private double _personalDiscount;
-
         public double PersonalDiscount
         {
             get
@@ -75,18 +71,15 @@ namespace GroceryStore.Models
             CartCount = 0;
         }
         public void AddProductsToCart(Product product, int amount)
-
         {
             Cart[CartCount] = product.Copy(amount);
             CartCount++;
         }
-
         public void UpdateName(string newFirstName, string newLastName)
         {
             FirstName = newFirstName;
             LastName = newLastName;
         }
-
         public void UpdateDiscount(bool hasDiscountCard)
         {
             HasDiscountCard = hasDiscountCard;
@@ -101,21 +94,18 @@ namespace GroceryStore.Models
             {
                 double totalCartSum = 0;
                 string cartValue = "";
-                
+                double totalDiscountSum = 0;
+
                 for (int i = 0; i < CartCount; i++)
                 {
                     double productTotal = Cart[i].Price * Cart[i].Amount;
-                    cartValue += $"({Cart[i].GetProductInfo()}- {Cart[i].Amount}x - \n \t \t\t \t\t \t\t \t {productTotal}";
+                    cartValue += $"({Cart[i].GetProductInfo()}- {Cart[i].Amount}x - {productTotal:C}\n\t\t\t \t\t \t\t \t";
                     totalCartSum = totalCartSum + productTotal;
+                    totalDiscountSum = totalCartSum * (1 - PersonalDiscount);
                 }
-                if (HasDiscountCard)
-                {
-                    totalCartSum *= (1 - PersonalDiscount);
-                }
-                cartValue += $"TOTAL = {totalCartSum} - DISCOUNT - {HasDiscountCard} ? {PersonalDiscount} : - {totalCartSum}";
+                cartValue += $"\n\t \t\t \t\t \t\t \t TOTAL = {totalCartSum:C} - DISCOUNT - {PercentageAsString} - {totalDiscountSum:C}";
                 return cartValue;
             }
-                
         }
 
     }

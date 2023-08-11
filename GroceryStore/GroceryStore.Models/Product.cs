@@ -12,7 +12,6 @@ namespace GroceryStore.Models
 {
     public class Product
     {
-       
         public string Name { get; set; }
         public ProductCategories.Category Category { get; set; }
         public double Price { get; set; }
@@ -30,7 +29,6 @@ namespace GroceryStore.Models
         {
             return $"({Category}) {Name} {Price:C}";
         }
-
         public Product Copy(int amount)
         {
             return new Product(Name, Category, Price, amount);
