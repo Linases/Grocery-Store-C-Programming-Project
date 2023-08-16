@@ -23,7 +23,7 @@ namespace GroceryStore.Models
             CustomerCount = 0;
             ProductCount = 0;
         }
-        public void AddCustomer(string firstName, string lastName, int age, string sex, bool hasDiscountCard, double personalDiscount)
+        public void AddCustomer(string firstName, string lastName, int age, string sex, bool hasDiscountCard, double personalDiscount = 0)
         {
             {
                 Customer customer = new Customer(firstName, lastName, age, sex, hasDiscountCard, personalDiscount);
@@ -31,9 +31,9 @@ namespace GroceryStore.Models
                 CustomerCount++;
             }
         }
-        public void AddProduct(string name, ProductCategories.Category categoryName, double price, int amount)
+        public void AddProduct(string name, ProductCategories.Category categoryName, double price)
         {
-            Product products = new Product(name, categoryName, price, amount);
+            Product products = new Product(name, categoryName, price);
             Products[ProductCount] = products;
             ProductCount++;
         }
@@ -64,7 +64,7 @@ namespace GroceryStore.Models
 
             for (int i = 0; i < CustomerCount; i++)
             {
-                Console.WriteLine($"| {Customers[i].FullName,-13} |  {Customers[i].Age,3} | {Customers[i].Sex,3} | {Customers[i].DiscountCardToString,12} | {Customers[i].PercentageAsString,16}| {Customers[i].GetCustomerInfo()}");
+                Console.WriteLine(Customers[i].GetCustomerInfo());
                 Console.WriteLine(new string('-', 118));
             }
         }

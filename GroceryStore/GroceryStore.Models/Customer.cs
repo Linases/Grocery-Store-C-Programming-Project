@@ -14,19 +14,13 @@ namespace GroceryStore.Models
         public int Age { get; set; }
         public string Sex { get; set; }
 
-        private bool _hasDiscountCard;
-        public bool HasDiscountCard
-        {
-            get
-            { return _hasDiscountCard; }
-            set
-            { _hasDiscountCard = value; }
-        }
-        public string DiscountCardToString
+        public bool HasDiscountCard { get; set; }
+
+        private string DiscountCardToString
         {
             get
             {
-                return _hasDiscountCard ? "Yes" : "No";
+                return HasDiscountCard ? "Yes" : "No";
             }
         }
         private double _personalDiscount;
@@ -41,25 +35,19 @@ namespace GroceryStore.Models
                 _personalDiscount = value;
             }
         }
-        public string PercentageAsString
+        private string PercentageAsString
         {
             get
             {
                 return (PersonalDiscount * 100).ToString("0.##") + "%";
             }
         }
-        public string FullName
-        {
-            get
-            {
-                return $"{FirstName} {LastName}";
-            }
-        }
+        public string FullName => $"{FirstName} {LastName}";
+
         public Product[] Cart { get; set; }
         public int CartCount { get; set; }
 
-
-        public Customer(string firstName, string lastName, int age, string sex, bool hasDiscountCard, double personalDiscount)
+        public Customer(string firstName, string lastName, int age, string sex, bool hasDiscountCard, double personalDiscount = 0.02)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -67,24 +55,35 @@ namespace GroceryStore.Models
             Sex = sex;
             HasDiscountCard = hasDiscountCard;
             PersonalDiscount = personalDiscount;
-            Cart = new Product[10];
+            Cart = new Product[100];
             CartCount = 0;
         }
+
         public void AddProductsToCart(Product product, int amount)
         {
-            Cart[CartCount] = product.Copy(amount);
-            CartCount++;
+            for (int i = 0; i < amount; i++)
+            {
+                Cart[CartCount] = product;
+                CartCount++;
+            }
         }
         public void UpdateName(string newFirstName, string newLastName)
         {
             FirstName = newFirstName;
             LastName = newLastName;
         }
-        public void UpdateDiscount(bool hasDiscountCard)
+        public void UpdateDiscount(bool hasDiscountCard, double personalDiscount = 0.02)
         {
             HasDiscountCard = hasDiscountCard;
+            PersonalDiscount = personalDiscount;
         }
+
         public string GetCustomerInfo()
+        {
+            return $"| {FullName,-13} |  {Age,3} | {Sex,3} | {DiscountCardToString,12} | {PercentageAsString,16}| {GetCustomerCartInfo()}";
+        }
+
+        private string GetCustomerCartInfo()
         {
             if (CartCount == 0)
             {
@@ -93,16 +92,50 @@ namespace GroceryStore.Models
             else
             {
                 double totalCartSum = 0;
-                string cartValue = "";
+                string cartValue = string.Empty;
                 double totalDiscountSum = 0;
+
+                Product[] uniqueProducts = new Product[CartCount];
+                int uniqueProductsCount = 0;
 
                 for (int i = 0; i < CartCount; i++)
                 {
-                    double productTotal = Cart[i].Price * Cart[i].Amount;
-                    cartValue += $"({Cart[i].GetProductInfo()}- {Cart[i].Amount}x - {productTotal:C}\n\t\t\t \t\t \t\t \t";
+                    bool existsInUniqueProducts = false;
+
+                    for (int j = 0; j < uniqueProductsCount; j++)
+                    {
+                        if (Cart[i] == uniqueProducts[j])
+                        {
+                            existsInUniqueProducts = true;
+                            break;
+                        }
+                    }
+
+                    if (existsInUniqueProducts == false)
+                    {
+                        uniqueProducts[uniqueProductsCount] = Cart[i];
+                        uniqueProductsCount++;
+                    }
+                }
+
+                for (int i = 0; i < uniqueProductsCount; i++)
+                {
+                    int amount = 0;
+
+                    for (int j = 0; j < CartCount; j++)
+                    {
+                        if (uniqueProducts[i] == Cart[j])
+                        {
+                            amount++;
+                        }
+                    }
+
+                    double productTotal = uniqueProducts[i].Price * amount;
+                    cartValue += $"({uniqueProducts[i].GetProductInfo()}- {amount}x - {productTotal:C}\n\t\t\t \t\t \t\t \t";
                     totalCartSum = totalCartSum + productTotal;
                     totalDiscountSum = totalCartSum * (1 - PersonalDiscount);
                 }
+
                 cartValue += $"\n\t \t\t \t\t \t\t \t TOTAL = {totalCartSum:C} - DISCOUNT - {PercentageAsString} - {totalDiscountSum:C}";
                 return cartValue;
             }
