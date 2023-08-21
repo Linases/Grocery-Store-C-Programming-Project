@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace GroceryStore.Models
 {
-    public class Customer
+ public class Customer
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -78,7 +78,7 @@ namespace GroceryStore.Models
             PersonalDiscount = personalDiscount;
         }
 
-        public string GetCustomerInfo()
+        public override string ToString()
         {
             return $"| {FullName,-13} |  {Age,3} | {Sex,3} | {DiscountCardToString,12} | {PercentageAsString,16}| {GetCustomerCartInfo()}";
         }
@@ -129,9 +129,8 @@ namespace GroceryStore.Models
                             amount++;
                         }
                     }
-
                     double productTotal = uniqueProducts[i].Price * amount;
-                    cartValue += $"({uniqueProducts[i].GetProductInfo()}- {amount}x - {productTotal:C}\n\t\t\t \t\t \t\t \t";
+                    cartValue += $"({uniqueProducts[i]} - {amount}x - {productTotal:C}\n\t\t\t \t\t \t\t \t";
                     totalCartSum = totalCartSum + productTotal;
                     totalDiscountSum = totalCartSum * (1 - PersonalDiscount);
                 }

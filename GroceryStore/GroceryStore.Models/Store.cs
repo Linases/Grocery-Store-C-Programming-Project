@@ -3,27 +3,22 @@ using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace GroceryStore.Models
 {
-    public class Store
+    public static class Store
     {
-        public Customer[] Customers { get; set; }
-        public Product[] Products { get; set; }
-        public int CustomerCount { get; set; }
-        public int ProductCount { get; set; }
+        public static Customer[] Customers { get; set; } = new Customer[10];
+        public static Product[] Products { get; set; } = new Product[10];
+        public static int CustomerCount { get; set; } = 0;
+        public static int ProductCount { get; set; } = 0;
 
-        public Store()
-        {
-            Customers = new Customer[10];
-            Products = new Product[10];
-            CustomerCount = 0;
-            ProductCount = 0;
-        }
-        public void AddCustomer(string firstName, string lastName, int age, string sex, bool hasDiscountCard, double personalDiscount = 0)
+        public static void AddCustomer(string firstName, string lastName, int age, string sex, bool hasDiscountCard, double personalDiscount = 0)
         {
             {
                 Customer customer = new Customer(firstName, lastName, age, sex, hasDiscountCard, personalDiscount);
@@ -31,13 +26,14 @@ namespace GroceryStore.Models
                 CustomerCount++;
             }
         }
-        public void AddProduct(string name, ProductCategories.Category categoryName, double price)
+        public static void AddProduct(Product product)
         {
-            Product products = new Product(name, categoryName, price);
-            Products[ProductCount] = products;
+
+            Products[ProductCount] = product;
             ProductCount++;
         }
-        public void UpdateCustomerName(string fullName, string newFirstName, string newLastName)
+
+        public static void UpdateCustomerName(string fullName, string newFirstName, string newLastName)
         {
             for (int i = 0; i < CustomerCount; i++)
 
@@ -46,7 +42,7 @@ namespace GroceryStore.Models
                     Customers[i].UpdateName(newFirstName, newLastName);
                 }
         }
-        public void UpdateDiscountCard(string fullName, bool hasDiscountCard)
+        public static void UpdateDiscountCard(string fullName, bool hasDiscountCard)
         {
             for (int i = 0; i < CustomerCount; i++)
             {
@@ -56,16 +52,16 @@ namespace GroceryStore.Models
                 }
             }
         }
-        public void PrintCustomerInformation()
+        public static void PrintCustomerInformation()
         {
-            Console.WriteLine(new string('-', 118));
+            Console.WriteLine(new string('-', 138));
             Console.WriteLine("| Full Name     | Age  | Sex  |Has Discount |Personal Discount|              Cart                ");
-            Console.WriteLine(new string('-', 118));
+            Console.WriteLine(new string('-', 138));
 
             for (int i = 0; i < CustomerCount; i++)
             {
-                Console.WriteLine(Customers[i].GetCustomerInfo());
-                Console.WriteLine(new string('-', 118));
+                Console.WriteLine(Customers[i]);
+                Console.WriteLine(new string('-', 138));
             }
         }
     }
