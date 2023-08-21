@@ -13,16 +13,8 @@ namespace GroceryStore.Models
         public string LastName { get; set; }
         public int Age { get; set; }
         public string Sex { get; set; }
-
         public bool HasDiscountCard { get; set; }
-
-        private string DiscountCardToString
-        {
-            get
-            {
-                return HasDiscountCard ? "Yes" : "No";
-            }
-        }
+     
         private double _personalDiscount;
         public double PersonalDiscount
         {
@@ -33,13 +25,6 @@ namespace GroceryStore.Models
             set
             {
                 _personalDiscount = value;
-            }
-        }
-        private string PercentageAsString
-        {
-            get
-            {
-                return (PersonalDiscount * 100).ToString("0.##") + "%";
             }
         }
         public string FullName => $"{FirstName} {LastName}";
@@ -57,6 +42,14 @@ namespace GroceryStore.Models
             PersonalDiscount = personalDiscount;
             Cart = new Product[100];
             CartCount = 0;
+        }
+        private string DiscountCardToString()
+        {
+            return HasDiscountCard ? "Yes" : "No";
+        }
+        private string ConvertDiscountCardToString()
+        {
+            return (PersonalDiscount * 100).ToString("0.##") + "%";
         }
 
         public void AddProductsToCart(Product product, int amount)
@@ -80,7 +73,7 @@ namespace GroceryStore.Models
 
         public override string ToString()
         {
-            return $"| {FullName,-13} |  {Age,3} | {Sex,3} | {DiscountCardToString,12} | {PercentageAsString,16}| {GetCustomerCartInfo()}";
+            return $"| {FullName,-13} |  {Age,3} | {Sex,3} | {DiscountCardToString(),12} | {ConvertDiscountCardToString(),16}| {GetCustomerCartInfo()}";
         }
 
         private string GetCustomerCartInfo()
@@ -135,7 +128,6 @@ namespace GroceryStore.Models
                     totalDiscountSum = totalCartSum * (1 - PersonalDiscount);
                 }
 
-                cartValue += $"\n\t \t\t \t\t \t\t \t TOTAL = {totalCartSum:C} - DISCOUNT - {PercentageAsString} - {totalDiscountSum:C}";
                 return cartValue;
             }
         }

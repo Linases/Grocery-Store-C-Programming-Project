@@ -11,14 +11,6 @@ namespace GroceryStore.Models
     {
         public bool IsAlcohol { get; set; }
 
-        public string isAlcoholToString
-        {
-            get
-            {
-                return IsAlcohol ? "Y" : "N";
-            }
-        }
-
         double Volume { get; set; }
 
         public Drink(string name, double price, double volume, int expirationDays = 30, bool isAlcohol = false) : base(name, ProductCategories.Category.Drinks, price, expirationDays)
@@ -27,9 +19,14 @@ namespace GroceryStore.Models
             Volume = volume;
         }
 
+        private string isAlcoholToString()
+        {
+            return IsAlcohol ? "Y" : "N";
+
+        }
         public override string ToString()
         {
-            return $"({Category}) {Name} {Price:C}, Exp. {ExpirationDate.ToString("dd.MM.yyyy")}, Vol. {Volume}, Alcohol - {isAlcoholToString}";
+            return $"({Category}) {Name} {Price:C}, Exp. {ExpirationDate.ToString("dd.MM.yyyy")}, Vol. {Volume}, Alcohol - {isAlcoholToString()}";
         }
     }
 }
