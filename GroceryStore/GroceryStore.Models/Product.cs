@@ -13,10 +13,10 @@ namespace GroceryStore.Models
 {
     public abstract class Product
     {
-        protected string Name { get; set; }
+        public string Name { get; set; }
         protected ProductCategories.Category Category { get; }
         public double Price { get; set; }
-        protected DateTime ExpirationDate { get; set; }
+        public DateTime ExpirationDate { get; set; }
         protected int ExpirationDays { get; set; }
 
         protected Product(string name, ProductCategories.Category categoryName, double price, int expirationDays = 1)

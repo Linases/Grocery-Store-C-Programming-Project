@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.Globalization;
 using System.Transactions;
 using System.Xml.Linq;
+using GroceryStore.Core.Exceptions;
 
 namespace GroceryStore.Models
 {
@@ -29,7 +30,7 @@ namespace GroceryStore.Models
         }
         public string FullName => $"{FirstName} {LastName}";
 
-        public Product[] Cart { get; set; }
+        public List <Product> Cart { get; set; }
         public int CartCount { get; set; }
 
         public Customer(string firstName, string lastName, int age, string sex, bool hasDiscountCard, double personalDiscount = 0.02)
@@ -40,7 +41,7 @@ namespace GroceryStore.Models
             Sex = sex;
             HasDiscountCard = hasDiscountCard;
             PersonalDiscount = personalDiscount;
-            Cart = new Product[100];
+            Cart = new List <Product>(100);
             CartCount = 0;
         }
         private string DiscountCardToString()
@@ -52,14 +53,40 @@ namespace GroceryStore.Models
             return (PersonalDiscount * 100).ToString("0.##") + "%";
         }
 
-        public void AddProductsToCart(Product product, int amount)
+        public void AddProductsToCart(Customer customer, Product product, int amount)
         {
             for (int i = 0; i < amount; i++)
             {
                 Cart[CartCount] = product;
                 CartCount++;
             }
+
+            try
+            {
+                if (customer.Age < 18 && product.ExpirationDate > DateTime.Now.AddDays(1))
+                {
+                    throw new  UnderAgeException(customer.FullName, Cart);
+                }
+                else if (product.ExpirationDate <= DateTime.Now.AddDays(1))
+                {
+                    throw new ExpiredProductException(customer.FullName, new[] { product }, product.ExpirationDate);
+                }
+                else
+                {
+                    Store.AddProduct(product);
+                    Console.WriteLine($"Added product '{product.Name}' to the cart.");
+                }
+            }
+            catch (UnderAgeException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (ExpiredProductException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
+    
         public void UpdateName(string newFirstName, string newLastName)
         {
             FirstName = newFirstName;

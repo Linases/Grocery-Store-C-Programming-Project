@@ -13,8 +13,8 @@ namespace GroceryStore.Models
 {
     public static class Store
     {
-        public static Customer[] Customers { get; set; } = new Customer[10];
-        public static Product[] Products { get; set; } = new Product[10];
+        public static HashSet<Customer> Customers { get; set; } = new HashSet <Customer>();
+        public static HashSet<Product> Products { get; set; } = new HashSet <Product>();
         public static int CustomerCount { get; set; } = 0;
         public static int ProductCount { get; set; } = 0;
 
@@ -29,7 +29,7 @@ namespace GroceryStore.Models
         public static void AddProduct(Product product)
         {
 
-            Products[ProductCount] = product;
+            HashSet<Product> Products [ProductCount] = product;
             ProductCount++;
         }
 
