@@ -11,12 +11,12 @@ internal class Program
         Store.AddCustomer("Ann", "Siemens", 44, "F", true, 0.09);
         Store.AddCustomer("Peter", "Parker", 9, "M", false);
 
-        Store.AddProduct(new Drink("Coca-cola",1.12, 0.5, 30,false));
+        Store.AddProduct(new Drink("Coca-cola",1.12, 0.5, false));
         Store.AddProduct(new FruitsAndVegetables("Tomatoes", 0.99,0.5));
         Store.AddProduct(new Snacks("Lay’s Cheese",  2.49));
         Store.AddProduct(new Fish("Norway Herring", 4.55, ProductCategories.FishType.Ocean));
         Store.AddProduct(new Meat("Chicken Nuggets", 4.99));
-        Store.AddProduct(new Drink("Aperol", 9.99, 0.75,30,true));
+        Store.AddProduct(new Drink("Aperol", 9.99, 0.75,true));
 
         Store.UpdateDiscountCard("Ann Siemens", false);
         Store.UpdateCustomerName("John Doe", "John", "Claus");
@@ -29,8 +29,12 @@ internal class Program
         Store.Customers[4].AddProductsToCart(Store.Products[0], 2);
         Store.Customers[3].AddProductsToCart(Store.Products[5], 1);
         Store.Customers[1].AddProductsToCart(Store.Products[4], 1);
-        
+
         Store.PrintCustomerInformation();
+
+       
+     
+
     }
 }
 

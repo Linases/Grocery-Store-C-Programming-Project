@@ -9,16 +9,17 @@ namespace GroceryStore.Models
 {
    public class FruitsAndVegetables : Product
     {
-        double Weight { get; set; } 
+        double Weight { get; set; }
+        public override ProductCategories.Category Category => ProductCategories.Category.FruitsAndVegetables;
 
-        public FruitsAndVegetables(string name, double price, double weight, int expirationDays =4 ) : base(name, ProductCategories.Category.FruitsAndVegetables, price, expirationDays)
+        public FruitsAndVegetables(string name, double price, double weight, int expirationDays =4 ) : base(name, price, expirationDays)
         {
             Weight = weight;
         }
 
-        public override string ToString()
+        public new string ToString()
         {
-            return $"({Category}) {Name} {Price:C}, Exp. {ExpirationDate.ToString("dd.MM.yyyy")}, {Weight}kg.";
+            return base.ToString()+ $",{Weight}kg.";
         }
     }
 }

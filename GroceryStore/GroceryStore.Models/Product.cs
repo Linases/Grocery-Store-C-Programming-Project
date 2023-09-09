@@ -14,20 +14,23 @@ namespace GroceryStore.Models
     public abstract class Product
     {
         protected string Name { get; set; }
-        protected ProductCategories.Category Category { get; }
+        public abstract ProductCategories.Category Category { get;  }
         public double Price { get; set; }
-        protected DateTime ExpirationDate { get; set; }
-        protected int ExpirationDays { get; set; }
 
-        protected Product(string name, ProductCategories.Category categoryName, double price, int expirationDays = 1)
+        public int ExpirationDays = 1;
+        public DateTime ExpirationDate
+        {
+            get
+            {
+                return DateTime.Today.AddDays(ExpirationDays);
+            }
+        }
+        public Product(string name, double price, int expirationDays)
         {
             Name = name;
-            Category = categoryName;
             Price = price;
             ExpirationDays = expirationDays;
-            ExpirationDate = DateTime.Today.AddDays(expirationDays);
         }
-
         public override string ToString()
         {
             return $"({Category}) {Name} {Price:C}, Exp. {ExpirationDate.ToString("dd.MM.yyyy")}";

@@ -10,8 +10,9 @@ namespace GroceryStore.Models
     public class Snacks : Product
     {
         public bool IsNoFat { get; set; }
+        public override ProductCategories.Category Category => ProductCategories.Category.Snacks;
 
-        public Snacks(string name, double price, bool isNotFat = false, int expirationDays = 90) : base(name, ProductCategories.Category.Snacks, price, expirationDays)
+        public Snacks(string name, double price, bool isNotFat = false, int expirationDays = 90) : base(name, price, expirationDays)
         {
             IsNoFat = isNotFat;
         }
@@ -20,9 +21,10 @@ namespace GroceryStore.Models
         {
             return !IsNoFat ? "Y" : "N";
         }
-        public override string ToString()
+
+        public new string ToString()
         {
-            return $"({Category}) {Name} {Price:C}, Exp. {ExpirationDate.ToString("dd.MM.yyyy")}, Fat - {isNotFatToString()}";
+            return base.ToString()+ $", Fat - {isNotFatToString()}";
         }
     }
 }
