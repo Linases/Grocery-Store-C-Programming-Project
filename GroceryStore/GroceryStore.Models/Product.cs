@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,22 +11,29 @@ using GroceryStore.Constants;
 
 namespace GroceryStore.Models
 {
-    public class Product
+    public abstract class Product
     {
-        public string Name { get; set; }
-        public ProductCategories.Category Category { get; set; }
+        protected string Name { get; set; }
+        public abstract ProductCategories.Category Category { get;  }
         public double Price { get; set; }
 
-        public Product(string name, ProductCategories.Category categoryName, double price)
+        public int ExpirationDays = 1;
+        public DateTime ExpirationDate
         {
-            this.Name = name;
-            this.Category = categoryName;
-            this.Price = price;
+            get
+            {
+                return DateTime.Today.AddDays(ExpirationDays);
+            }
         }
-
-        public string GetProductInfo()
+        public Product(string name, double price, int expirationDays)
         {
-            return $"({Category}) {Name} {Price:C}";
+            Name = name;
+            Price = price;
+            ExpirationDays = expirationDays;
+        }
+        public override string ToString()
+        {
+            return $"({Category}) {Name} {Price:C}, Exp. {ExpirationDate.ToString("dd.MM.yyyy")}";
         }
     }
 }

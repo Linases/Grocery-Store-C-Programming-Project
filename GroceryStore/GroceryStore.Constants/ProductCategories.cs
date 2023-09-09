@@ -44,5 +44,11 @@ public static class ProductCategories
 
     }
 
+    public enum FishType
+    {
+        Sea,
+        Freshwater,
+        Ocean
+    }
 
 }

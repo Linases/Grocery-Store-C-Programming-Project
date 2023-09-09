@@ -7,22 +7,14 @@ using System.Xml.Linq;
 
 namespace GroceryStore.Models
 {
-    public class Customer
+ public class Customer
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int Age { get; set; }
         public string Sex { get; set; }
-
         public bool HasDiscountCard { get; set; }
-
-        private string DiscountCardToString
-        {
-            get
-            {
-                return HasDiscountCard ? "Yes" : "No";
-            }
-        }
+     
         private double _personalDiscount;
         public double PersonalDiscount
         {
@@ -35,18 +27,10 @@ namespace GroceryStore.Models
                 _personalDiscount = value;
             }
         }
-        private string PercentageAsString
-        {
-            get
-            {
-                return (PersonalDiscount * 100).ToString("0.##") + "%";
-            }
-        }
         public string FullName => $"{FirstName} {LastName}";
 
-        public Product[] Cart { get; set; }
-        public int CartCount { get; set; }
-
+        public List <Product> Cart { get; set; }
+        
         public Customer(string firstName, string lastName, int age, string sex, bool hasDiscountCard, double personalDiscount = 0.02)
         {
             FirstName = firstName;
@@ -55,16 +39,22 @@ namespace GroceryStore.Models
             Sex = sex;
             HasDiscountCard = hasDiscountCard;
             PersonalDiscount = personalDiscount;
-            Cart = new Product[100];
-            CartCount = 0;
+            Cart = new List <Product>();
+        }
+        private string DiscountCardToString()
+        {
+            return HasDiscountCard ? "Yes" : "No";
+        }
+        private string ConvertDiscountCardToString()
+        {
+            return (PersonalDiscount * 100).ToString("0.##") + "%";
         }
 
         public void AddProductsToCart(Product product, int amount)
         {
             for (int i = 0; i < amount; i++)
             {
-                Cart[CartCount] = product;
-                CartCount++;
+                Cart.Add(product);
             }
         }
         public void UpdateName(string newFirstName, string newLastName)
@@ -78,14 +68,14 @@ namespace GroceryStore.Models
             PersonalDiscount = personalDiscount;
         }
 
-        public string GetCustomerInfo()
+        public override string ToString()
         {
-            return $"| {FullName,-13} |  {Age,3} | {Sex,3} | {DiscountCardToString,12} | {PercentageAsString,16}| {GetCustomerCartInfo()}";
+            return $"| {FullName,-13} |  {Age,3} | {Sex,3} | {DiscountCardToString(),12} | {ConvertDiscountCardToString(),16}| {GetCustomerCartInfo()}";
         }
 
         private string GetCustomerCartInfo()
         {
-            if (CartCount == 0)
+            if (Cart.Count == 0)
             {
                 return "EMPTY";
             }
@@ -95,14 +85,13 @@ namespace GroceryStore.Models
                 string cartValue = string.Empty;
                 double totalDiscountSum = 0;
 
-                Product[] uniqueProducts = new Product[CartCount];
-                int uniqueProductsCount = 0;
+               List< Product> uniqueProducts = new List<Product>();
 
-                for (int i = 0; i < CartCount; i++)
+                for (int i = 0; i < Cart.Count; i++)
                 {
                     bool existsInUniqueProducts = false;
 
-                    for (int j = 0; j < uniqueProductsCount; j++)
+                    for (int j = 0; j < uniqueProducts.Count; j++)
                     {
                         if (Cart[i] == uniqueProducts[j])
                         {
@@ -113,30 +102,27 @@ namespace GroceryStore.Models
 
                     if (existsInUniqueProducts == false)
                     {
-                        uniqueProducts[uniqueProductsCount] = Cart[i];
-                        uniqueProductsCount++;
+                        uniqueProducts.Add(Cart[i]);
                     }
                 }
 
-                for (int i = 0; i < uniqueProductsCount; i++)
+                for (int i = 0; i < uniqueProducts.Count; i++)
                 {
                     int amount = 0;
 
-                    for (int j = 0; j < CartCount; j++)
+                    for (int j = 0; j < Cart.Count; j++)
                     {
                         if (uniqueProducts[i] == Cart[j])
                         {
                             amount++;
                         }
                     }
-
                     double productTotal = uniqueProducts[i].Price * amount;
-                    cartValue += $"({uniqueProducts[i].GetProductInfo()}- {amount}x - {productTotal:C}\n\t\t\t \t\t \t\t \t";
+                    cartValue += $"({uniqueProducts[i]} - {amount}x - {productTotal:C}\n\t\t\t \t\t \t\t \t";
                     totalCartSum = totalCartSum + productTotal;
                     totalDiscountSum = totalCartSum * (1 - PersonalDiscount);
                 }
 
-                cartValue += $"\n\t \t\t \t\t \t\t \t TOTAL = {totalCartSum:C} - DISCOUNT - {PercentageAsString} - {totalDiscountSum:C}";
                 return cartValue;
             }
         }
