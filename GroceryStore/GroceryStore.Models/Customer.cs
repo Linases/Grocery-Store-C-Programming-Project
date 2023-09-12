@@ -31,8 +31,7 @@ namespace GroceryStore.Models
         public string FullName => $"{FirstName} {LastName}";
 
         public List <Product> Cart { get; set; }
-        public int CartCount { get; set; }
-
+        
         public Customer(string firstName, string lastName, int age, string sex, bool hasDiscountCard, double personalDiscount = 0.02)
         {
             FirstName = firstName;
@@ -41,8 +40,7 @@ namespace GroceryStore.Models
             Sex = sex;
             HasDiscountCard = hasDiscountCard;
             PersonalDiscount = personalDiscount;
-            Cart = new List <Product>(100);
-            CartCount = 0;
+            Cart = new List <Product>();
         }
         private string DiscountCardToString()
         {
@@ -57,8 +55,7 @@ namespace GroceryStore.Models
         {
             for (int i = 0; i < amount; i++)
             {
-                Cart[CartCount] = product;
-                CartCount++;
+                Cart.Add(product);
             }
 
             try
@@ -105,7 +102,7 @@ namespace GroceryStore.Models
 
         private string GetCustomerCartInfo()
         {
-            if (CartCount == 0)
+            if (Cart.Count == 0)
             {
                 return "EMPTY";
             }
@@ -115,14 +112,13 @@ namespace GroceryStore.Models
                 string cartValue = string.Empty;
                 double totalDiscountSum = 0;
 
-                Product[] uniqueProducts = new Product[CartCount];
-                int uniqueProductsCount = 0;
+               List< Product> uniqueProducts = new List<Product>();
 
-                for (int i = 0; i < CartCount; i++)
+                for (int i = 0; i < Cart.Count; i++)
                 {
                     bool existsInUniqueProducts = false;
 
-                    for (int j = 0; j < uniqueProductsCount; j++)
+                    for (int j = 0; j < uniqueProducts.Count; j++)
                     {
                         if (Cart[i] == uniqueProducts[j])
                         {
@@ -133,16 +129,15 @@ namespace GroceryStore.Models
 
                     if (existsInUniqueProducts == false)
                     {
-                        uniqueProducts[uniqueProductsCount] = Cart[i];
-                        uniqueProductsCount++;
+                        uniqueProducts.Add(Cart[i]);
                     }
                 }
 
-                for (int i = 0; i < uniqueProductsCount; i++)
+                for (int i = 0; i < uniqueProducts.Count; i++)
                 {
                     int amount = 0;
 
-                    for (int j = 0; j < CartCount; j++)
+                    for (int j = 0; j < Cart.Count; j++)
                     {
                         if (uniqueProducts[i] == Cart[j])
                         {

@@ -13,29 +13,24 @@ namespace GroceryStore.Models
 {
     public static class Store
     {
-        public static HashSet<Customer> Customers { get; set; } = new HashSet <Customer>();
-        public static HashSet<Product> Products { get; set; } = new HashSet <Product>();
-        public static int CustomerCount { get; set; } = 0;
-        public static int ProductCount { get; set; } = 0;
-
+        public static List<Customer> Customers { get; set; } = new List<Customer>();
+        public static List<Product> Products { get; set; } = new List<Product>();
+        
         public static void AddCustomer(string firstName, string lastName, int age, string sex, bool hasDiscountCard, double personalDiscount = 0)
         {
             {
                 Customer customer = new Customer(firstName, lastName, age, sex, hasDiscountCard, personalDiscount);
-                Customers[CustomerCount] = customer;
-                CustomerCount++;
+                Customers.Add(customer);
             }
         }
         public static void AddProduct(Product product)
         {
-
-            HashSet<Product> Products [ProductCount] = product;
-            ProductCount++;
+            Products.Add(product);
         }
 
         public static void UpdateCustomerName(string fullName, string newFirstName, string newLastName)
         {
-            for (int i = 0; i < CustomerCount; i++)
+            for (int i = 0; i < Customers.Count; i++)
 
                 if (Customers[i].FullName == fullName)
                 {
@@ -44,7 +39,7 @@ namespace GroceryStore.Models
         }
         public static void UpdateDiscountCard(string fullName, bool hasDiscountCard)
         {
-            for (int i = 0; i < CustomerCount; i++)
+            for (int i = 0; i < Customers.Count; i++)
             {
                 if (Customers[i].FullName == fullName)
                 {
@@ -58,7 +53,7 @@ namespace GroceryStore.Models
             Console.WriteLine("| Full Name     | Age  | Sex  |Has Discount |Personal Discount|              Cart                ");
             Console.WriteLine(new string('-', 138));
 
-            for (int i = 0; i < CustomerCount; i++)
+            for (int i = 0; i < Customers.Count; i++)
             {
                 Console.WriteLine(Customers[i]);
                 Console.WriteLine(new string('-', 138));

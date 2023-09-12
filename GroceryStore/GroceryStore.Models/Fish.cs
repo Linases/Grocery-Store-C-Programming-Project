@@ -10,16 +10,17 @@ namespace GroceryStore.Models
     public class Fish : Product
     {
         public ProductCategories.FishType FishType { get; set; }
+        public override ProductCategories.Category Category => ProductCategories.Category.Fish;
 
-        public Fish(string name, double price, ProductCategories.FishType fishType, int expirationDays = 1) : base(name, ProductCategories.Category.Fish, price, expirationDays)
+        public Fish(string name, double price, ProductCategories.FishType fishType, int expirationDays = 1) : base(name, price, expirationDays)
         {
             FishType = fishType;
         }
 
 
-        public override string ToString()
+        public new string ToString()
         {
-            return $"({Category}) {Name} {Price:C}, Exp. {ExpirationDate.ToString("dd.MM.yyyy")}, {FishType}";
+            return base.ToString()+$" {FishType}";
         }
     }
 }
