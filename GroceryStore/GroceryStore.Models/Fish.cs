@@ -9,10 +9,11 @@ namespace GroceryStore.Models
 {
     public class Fish : Product
     {
-        public ProductCategories.FishType FishType { get; set; }
-        public override ProductCategories.Category Category => ProductCategories.Category.Fish;
 
-        public Fish(string name, double price, ProductCategories.FishType fishType, int expirationDays = 1) : base(name, price, expirationDays)
+        public FishType FishType { get; set; }
+        public override ProductCategories Category => ProductCategories.Fish;
+
+        public Fish(string name, double price, FishType fishType, int expirationDays = 1) : base(name, price, expirationDays)
         {
             FishType = fishType;
         }
@@ -20,7 +21,7 @@ namespace GroceryStore.Models
 
         public new string ToString()
         {
-            return base.ToString()+$" {FishType}";
+            return base.ToString() + $" {FishType}";
         }
     }
 }

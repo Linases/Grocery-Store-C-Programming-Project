@@ -10,7 +10,7 @@ namespace GroceryStore.Models
     public class Meat : Product
 
     {
-        public override ProductCategories.Category Category => ProductCategories.Category.Meat;
+        public override ProductCategories Category => ProductCategories.Meat;
 
         public Meat (string name, double price, int expirationDays = 1) : base(name, price, expirationDays)
         {

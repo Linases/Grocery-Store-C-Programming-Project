@@ -9,16 +9,13 @@ namespace GroceryStore.Core.Exceptions
     public class ExpiredProductException : Exception
     {
         public string CustomerFullName { get; set; }
-        public List<string> ExpiredProducts { get; set; }
+        public List<string> ExpiredProducts { get; set; } = new List<string>();
         public DateTime ExpiryDate { get; set; }
 
-        public ExpiredProductException(string message) : base(message) { }
-        public ExpiredProductException(string message, Exception innerException) : base(message, innerException)
-        { }
-        public ExpiredProductException(string customerFullName, List<string> expiredProducts, DateTime expiryDate)
+        public ExpiredProductException(string customerFullName, string expiredProducts, DateTime expiryDate)
         {
             CustomerFullName = customerFullName;
-            ExpiredProducts = expiredProducts;
+            ExpiredProducts.Add(expiredProducts);
             ExpiryDate = expiryDate;
         }
 
@@ -33,7 +30,7 @@ namespace GroceryStore.Core.Exceptions
     }
 }
 
-        
-      
-    
+
+
+
 

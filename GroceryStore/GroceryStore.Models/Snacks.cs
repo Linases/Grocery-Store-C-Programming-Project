@@ -10,7 +10,7 @@ namespace GroceryStore.Models
     public class Snacks : Product
     {
         public bool IsNoFat { get; set; }
-        public override ProductCategories.Category Category => ProductCategories.Category.Snacks;
+        public override ProductCategories Category => ProductCategories.Snacks;
 
         public Snacks(string name, double price, bool isNotFat = false, int expirationDays = 90) : base(name, price, expirationDays)
         {

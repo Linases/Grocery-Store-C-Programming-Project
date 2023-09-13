@@ -13,12 +13,13 @@ namespace GroceryStore.Models
 
         double Volume { get; set; }
 
-        public override ProductCategories.Category Category => ProductCategories.Category.Drinks;
+        public override ProductCategories Category => ProductCategories.Drinks;
 
         public Drink(string name, double price, double volume, bool isAlcohol = false, int expirationDays = 30) : base(name, price, expirationDays)
         {
             IsAlcohol = isAlcohol;
             Volume = volume;
+            AgeRestrictedProduct = isAlcohol;
         }
 
         private string isAlcoholToString()
@@ -26,7 +27,7 @@ namespace GroceryStore.Models
             return IsAlcohol ? "Y" : "N";
         }
 
-        public new string ToString() 
+        public new string ToString()
         {
             return base.ToString() + $", Vol. {Volume}, Alcohol - {isAlcoholToString()}";
         }

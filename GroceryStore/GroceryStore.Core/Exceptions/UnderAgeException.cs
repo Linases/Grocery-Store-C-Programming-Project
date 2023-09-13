@@ -9,14 +9,12 @@ namespace GroceryStore.Core.Exceptions
    public class UnderAgeException: Exception
     {
         public string CustomerFullName { get; set; }
-        public List<string> RestrictedProducts { get; set; }
-        public UnderAgeException(string message) : base(message) { }
-        public UnderAgeException(string message, Exception innerException) : base(message, innerException)
-        { }
-        public UnderAgeException(string customerFullName, List <string>restrictedProducts)
+        public List<string> RestrictedProducts { get; set; } = new List<string>();
+          
+        public UnderAgeException(string customerFullName, string restrictedProduct)
         {
             CustomerFullName = customerFullName;
-            RestrictedProducts = restrictedProducts;
+            RestrictedProducts.Add(restrictedProduct);
         }
 
         public override string Message

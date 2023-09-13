@@ -13,8 +13,8 @@ namespace GroceryStore.Models
 {
     public static class Store
     {
-        public static List<Customer> Customers { get; set; } = new List<Customer>();
-        public static List<Product> Products { get; set; } = new List<Product>();
+        public static HashSet<Customer> Customers { get; set; } = new HashSet<Customer>();
+        public static HashSet<Product> Products { get; set; } = new HashSet<Product>();
         
         public static void AddCustomer(string firstName, string lastName, int age, string sex, bool hasDiscountCard, double personalDiscount = 0)
         {
@@ -30,20 +30,45 @@ namespace GroceryStore.Models
 
         public static void UpdateCustomerName(string fullName, string newFirstName, string newLastName)
         {
-            for (int i = 0; i < Customers.Count; i++)
-
-                if (Customers[i].FullName == fullName)
+            foreach (var customer in Customers)
+            {
+                if (customer.FullName == fullName)
                 {
-                    Customers[i].UpdateName(newFirstName, newLastName);
+                    customer.UpdateName(newFirstName, newLastName);
                 }
+            }
+        }
+
+        public static Customer GetCustomer(string fullName)
+        {
+            foreach (var customer in Customers)
+            {
+                if (customer.FullName == fullName)
+                {
+                    return customer;
+                }
+            }
+            throw new Exception("Customer not found: " + fullName);
+
+        }
+        public static Product GetProduct(string productName)
+        {
+            foreach (var product in Products)
+            {
+                if (product.Name == productName)
+                {
+                    return product;
+                }
+            }
+            throw new Exception("Product not found: " + productName);
         }
         public static void UpdateDiscountCard(string fullName, bool hasDiscountCard)
         {
-            for (int i = 0; i < Customers.Count; i++)
+            foreach(var customer in Customers)
             {
-                if (Customers[i].FullName == fullName)
+                if (customer.FullName == fullName)
                 {
-                    Customers[i].UpdateDiscount(hasDiscountCard);
+                   customer.UpdateDiscount(hasDiscountCard);
                 }
             }
         }
@@ -53,9 +78,9 @@ namespace GroceryStore.Models
             Console.WriteLine("| Full Name     | Age  | Sex  |Has Discount |Personal Discount|              Cart                ");
             Console.WriteLine(new string('-', 138));
 
-            for (int i = 0; i < Customers.Count; i++)
+            foreach (var customer in Customers) 
             {
-                Console.WriteLine(Customers[i]);
+                Console.WriteLine(customer);
                 Console.WriteLine(new string('-', 138));
             }
         }
