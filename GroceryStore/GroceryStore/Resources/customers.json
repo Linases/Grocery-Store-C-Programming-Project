@@ -1,0 +1,211 @@
+[
+  {
+    "FirstName": "John",
+    "LastName": "Claus",
+    "Age": 22,
+    "Sex": "M",
+    "HasDiscountCard": true,
+    "PersonalDiscount": 0.02,
+    "FullName": "John Claus",
+    "Cart": [
+      {
+        "Name": "Coca-cola",
+        "Category": 5,
+        "Price": 1.12,
+        "AgeRestrictedProduct": false,
+        "ExpirationDate": "2023-10-13T00:00:00+03:00"
+      },
+      {
+        "Name": "Coca-cola",
+        "Category": 5,
+        "Price": 1.12,
+        "AgeRestrictedProduct": false,
+        "ExpirationDate": "2023-10-13T00:00:00+03:00"
+      },
+      {
+        "Name": "Norway Herring",
+        "Category": 3,
+        "Price": 4.55,
+        "AgeRestrictedProduct": false,
+        "ExpirationDate": "2023-09-14T00:00:00+03:00"
+      },
+      {
+        "Name": "Tomatoes",
+        "Category": 1,
+        "Price": 0.99,
+        "AgeRestrictedProduct": false,
+        "ExpirationDate": "2023-09-17T00:00:00+03:00"
+      },
+      {
+        "Name": "Tomatoes",
+        "Category": 1,
+        "Price": 0.99,
+        "AgeRestrictedProduct": false,
+        "ExpirationDate": "2023-09-17T00:00:00+03:00"
+      },
+      {
+        "Name": "Tomatoes",
+        "Category": 1,
+        "Price": 0.99,
+        "AgeRestrictedProduct": false,
+        "ExpirationDate": "2023-09-17T00:00:00+03:00"
+      },
+      {
+        "Name": "Tomatoes",
+        "Category": 1,
+        "Price": 0.99,
+        "AgeRestrictedProduct": false,
+        "ExpirationDate": "2023-09-17T00:00:00+03:00"
+      },
+      {
+        "Name": "Tomatoes",
+        "Category": 1,
+        "Price": 0.99,
+        "AgeRestrictedProduct": false,
+        "ExpirationDate": "2023-09-17T00:00:00+03:00"
+      },
+      {
+        "Name": "Tomatoes",
+        "Category": 1,
+        "Price": 0.99,
+        "AgeRestrictedProduct": false,
+        "ExpirationDate": "2023-09-17T00:00:00+03:00"
+      },
+      {
+        "Name": "Tomatoes",
+        "Category": 1,
+        "Price": 0.99,
+        "AgeRestrictedProduct": false,
+        "ExpirationDate": "2023-09-17T00:00:00+03:00"
+      }
+    ]
+  },
+  {
+    "FirstName": "Sam",
+    "LastName": "Brooks",
+    "Age": 67,
+    "Sex": "F",
+    "HasDiscountCard": true,
+    "PersonalDiscount": 0.12,
+    "FullName": "Sam Brooks",
+    "Cart": [
+      {
+        "Name": "Chicken Nuggets",
+        "Category": 2,
+        "Price": 4.99,
+        "AgeRestrictedProduct": false,
+        "ExpirationDate": "2023-09-14T00:00:00+03:00"
+      }
+    ]
+  },
+  {
+    "FirstName": "Alois",
+    "LastName": "Winter",
+    "Age": 15,
+    "Sex": "M",
+    "HasDiscountCard": false,
+    "PersonalDiscount": 0,
+    "FullName": "Alois Winter",
+    "Cart": [
+      {
+        "Name": "Tomatoes",
+        "Category": 1,
+        "Price": 0.99,
+        "AgeRestrictedProduct": false,
+        "ExpirationDate": "2023-09-17T00:00:00+03:00"
+      },
+      {
+        "Name": "Tomatoes",
+        "Category": 1,
+        "Price": 0.99,
+        "AgeRestrictedProduct": false,
+        "ExpirationDate": "2023-09-17T00:00:00+03:00"
+      },
+      {
+        "Name": "Tomatoes",
+        "Category": 1,
+        "Price": 0.99,
+        "AgeRestrictedProduct": false,
+        "ExpirationDate": "2023-09-17T00:00:00+03:00"
+      }
+    ]
+  },
+  {
+    "FirstName": "Ann",
+    "LastName": "Siemens",
+    "Age": 44,
+    "Sex": "F",
+    "HasDiscountCard": false,
+    "PersonalDiscount": 0,
+    "FullName": "Ann Siemens",
+    "Cart": [
+      {
+        "Name": "Aperol",
+        "Category": 5,
+        "Price": 9.99,
+        "AgeRestrictedProduct": true,
+        "ExpirationDate": "2023-10-13T00:00:00+03:00"
+      }
+    ]
+  },
+  {
+    "FirstName": "Peter",
+    "LastName": "Parker",
+    "Age": 9,
+    "Sex": "M",
+    "HasDiscountCard": false,
+    "PersonalDiscount": 0,
+    "FullName": "Peter Parker",
+    "Cart": [
+      {
+        "Name": "Lay\u2019s Cheese",
+        "Category": 4,
+        "Price": 2.49,
+        "AgeRestrictedProduct": false,
+        "ExpirationDate": "2023-12-12T00:00:00+02:00"
+      },
+      {
+        "Name": "Lay\u2019s Cheese",
+        "Category": 4,
+        "Price": 2.49,
+        "AgeRestrictedProduct": false,
+        "ExpirationDate": "2023-12-12T00:00:00+02:00"
+      },
+      {
+        "Name": "Lay\u2019s Cheese",
+        "Category": 4,
+        "Price": 2.49,
+        "AgeRestrictedProduct": false,
+        "ExpirationDate": "2023-12-12T00:00:00+02:00"
+      },
+      {
+        "Name": "Lay\u2019s Cheese",
+        "Category": 4,
+        "Price": 2.49,
+        "AgeRestrictedProduct": false,
+        "ExpirationDate": "2023-12-12T00:00:00+02:00"
+      },
+      {
+        "Name": "Lay\u2019s Cheese",
+        "Category": 4,
+        "Price": 2.49,
+        "AgeRestrictedProduct": false,
+        "ExpirationDate": "2023-12-12T00:00:00+02:00"
+      },
+      {
+        "Name": "Coca-cola",
+        "Category": 5,
+        "Price": 1.12,
+        "AgeRestrictedProduct": false,
+        "ExpirationDate": "2023-10-13T00:00:00+03:00"
+      },
+      {
+        "Name": "Coca-cola",
+        "Category": 5,
+        "Price": 1.12,
+        "AgeRestrictedProduct": false,
+        "ExpirationDate": "2023-10-13T00:00:00+03:00"
+      }
+    ]
+  }
+]

@@ -9,7 +9,6 @@ namespace GroceryStore.Models
 {
     public class Fish : Product
     {
-
         public FishType FishType { get; set; }
         public override ProductCategories Category => ProductCategories.Fish;
 

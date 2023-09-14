@@ -1,0 +1,44 @@
+[
+  {
+    "Name": "Coca-cola",
+    "Category": 5,
+    "Price": 1.12,
+    "AgeRestrictedProduct": false,
+    "ExpirationDate": "2023-10-13T00:00:00+03:00"
+  },
+  {
+    "Name": "Tomatoes",
+    "Category": 1,
+    "Price": 0.99,
+    "AgeRestrictedProduct": false,
+    "ExpirationDate": "2023-09-17T00:00:00+03:00"
+  },
+  {
+    "Name": "Lay\u2019s Cheese",
+    "Category": 4,
+    "Price": 2.49,
+    "AgeRestrictedProduct": false,
+    "ExpirationDate": "2023-12-12T00:00:00+02:00"
+  },
+  {
+    "Name": "Norway Herring",
+    "Category": 3,
+    "Price": 4.55,
+    "AgeRestrictedProduct": false,
+    "ExpirationDate": "2023-09-14T00:00:00+03:00"
+  },
+  {
+    "Name": "Chicken Nuggets",
+    "Category": 2,
+    "Price": 4.99,
+    "AgeRestrictedProduct": false,
+    "ExpirationDate": "2023-09-14T00:00:00+03:00"
+  },
+  {
+    "Name": "Aperol",
+    "Category": 5,
+    "Price": 9.99,
+    "AgeRestrictedProduct": true,
+    "ExpirationDate": "2023-10-13T00:00:00+03:00"
+  }
+]

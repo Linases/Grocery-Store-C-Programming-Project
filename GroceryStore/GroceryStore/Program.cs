@@ -37,12 +37,13 @@ internal class Program
       
 
        Store.PrintCustomerInformation();
-        //var options = new JsonSerializerOptions();
-        //options.WriteIndented = true;
-        //string productsJson = JsonSerializer.Serialize(Store.Products, options);
-        //File.WriteAllText("products.json", productsJson);
-        //string customersJson = JsonSerializer.Serialize(Store.Customers, options);
-        //File.WriteAllText("customers.json", customersJson);
+
+        var options = new JsonSerializerOptions();
+        options.WriteIndented = true;
+        string productsJson = JsonSerializer.Serialize(Store.Products, options);
+        File.WriteAllText("products.json", productsJson);
+        string customersJson = JsonSerializer.Serialize(Store.Customers, options);
+        File.WriteAllText("customers.json", customersJson);
 
 
 

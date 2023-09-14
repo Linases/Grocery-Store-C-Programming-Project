@@ -42,7 +42,6 @@ namespace GroceryStore.Models
             HasDiscountCard = hasDiscountCard;
             PersonalDiscount = personalDiscount;
             Cart = new List<Product>();
-
         }
         private string DiscountCardToString()
         {
@@ -69,7 +68,6 @@ namespace GroceryStore.Models
                 for (int i = 0; i < amount; i++)
                 {
                     Cart.Add(product);
-                    Console.WriteLine($"Added product '{product.Name}' to the cart.");
                 }
             }
 
@@ -106,53 +104,21 @@ namespace GroceryStore.Models
             }
             else
             {
-                //    from products
-                //    select product.Name, product.Price, product.Count
-                //    group by product.Name, product.Price
-
                 double totalCartSum = 0;
                 string cartValue = string.Empty;
                 double totalDiscountSum = 0;
 
+                var groupedResult = from s in Cart
+                                    group s by s;
 
-                //List<Product> uniqueProducts = new List<Product>();
-
-                //for (int i = 0; i < Cart.Count; i++)
-                //{
-                //    bool existsInUniqueProducts = false;
-
-                //    for (int j = 0; j < uniqueProducts.Count; j++)
-                //    {
-                //        if (Cart[i] == uniqueProducts[j])
-                //        {
-                //            existsInUniqueProducts = true;
-                //            break;
-                //        }
-                //    }
-
-                //    if (existsInUniqueProducts == false)
-                //    {
-                //        uniqueProducts.Add(Cart[i]);
-                //    }
-                //}
-
-                //for (int i = 0; i < uniqueProducts.Count; i++)
-                //{
-                //    int amount = 0;
-
-                //    for (int j = 0; j < Cart.Count; j++)
-                //    {
-                //        if (uniqueProducts[i] == Cart[j])
-                //        {
-                //            amount++;
-                //        }
-                //    }
-                //    double productTotal = uniqueProducts[i].Price * amount;
-                //    cartValue += $"({uniqueProducts[i]} - {amount}x - {productTotal:C}\n\t\t\t \t\t \t\t \t";
-                //    totalCartSum = totalCartSum + productTotal;
-                //    totalDiscountSum = totalCartSum * (1 - PersonalDiscount);
-                //}
-
+                foreach (var group in groupedResult)
+                {
+                    double productTotal = group.Key.Price * group.Count();
+                    cartValue += $"({group.Key} - {group.Count()}x - {productTotal:C}\n\t\t\t \t\t \t\t \t";
+                    totalCartSum = totalCartSum + productTotal;
+                    totalDiscountSum = totalCartSum * (1 - PersonalDiscount);
+                }
+                cartValue += $"\n\t \t\t \t\t \t\t \t TOTAL = {totalCartSum:C} - DISCOUNT - " + ConvertDiscountCardToString() + $"  - {totalDiscountSum:C}";
                 return cartValue;
             }
         }
