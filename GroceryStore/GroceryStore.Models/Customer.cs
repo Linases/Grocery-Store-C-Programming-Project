@@ -52,7 +52,7 @@ namespace GroceryStore.Models
             return (PersonalDiscount * 100).ToString("0.##") + "%";
         }
 
-        public void AddProductsToCart(Product product, int amount)
+        public void AddProductsToCart<T>(T product, int amount) where T : Product 
         {
 
             try

@@ -1,4 +1,5 @@
 ﻿using GroceryStore.Constants;
+using GroceryStore.Core.Helpers;
 using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,21 @@ namespace GroceryStore.Models
         public static HashSet<Customer> Customers { get; set; } = new HashSet<Customer>();
         public static HashSet<Product> Products { get; set; } = new HashSet<Product>();
         
+        public static void LoadCustomers()
+        {
+           JsonHelper.GetData<Customer>("customers.json");
+        }
+        public static void Loadproducts()
+        {
+            JsonHelper.GetData<Product>("products.json");
+        }
+
+        public static void AddCustomer ()
+        {
+           
+
+        }
+
         public static void AddCustomer(string firstName, string lastName, int age, string sex, bool hasDiscountCard, double personalDiscount = 0)
         {
             {
