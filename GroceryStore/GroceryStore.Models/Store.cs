@@ -16,19 +16,19 @@ namespace GroceryStore.Models
     {
         public static HashSet<Customer> Customers { get; set; } = new HashSet<Customer>();
         public static HashSet<Product> Products { get; set; } = new HashSet<Product>();
-        
+
         public static void LoadCustomers()
         {
-           JsonHelper.GetData<Customer>("customers.json");
+            JsonHelper.GetData<Customer>("customers.json");
         }
         public static void Loadproducts()
         {
             JsonHelper.GetData<Product>("products.json");
         }
 
-        public static void AddCustomer ()
+        public static void AddCustomer()
         {
-           
+
 
         }
 
@@ -80,11 +80,11 @@ namespace GroceryStore.Models
         }
         public static void UpdateDiscountCard(string fullName, bool hasDiscountCard)
         {
-            foreach(var customer in Customers)
+            foreach (var customer in Customers)
             {
                 if (customer.FullName == fullName)
                 {
-                   customer.UpdateDiscount(hasDiscountCard);
+                    customer.UpdateDiscount(hasDiscountCard);
                 }
             }
         }
@@ -94,7 +94,7 @@ namespace GroceryStore.Models
             Console.WriteLine("| Full Name     | Age  | Sex  |Has Discount |Personal Discount|              Cart                ");
             Console.WriteLine(new string('-', 138));
 
-            foreach (var customer in Customers) 
+            foreach (var customer in Customers)
             {
                 Console.WriteLine(customer);
                 Console.WriteLine(new string('-', 138));

@@ -24,7 +24,7 @@ internal class Program
         Store.UpdateDiscountCard("Ann Siemens", false);
         Store.UpdateCustomerName("John Doe", "John", "Claus");
 
-       
+
 
         Store.GetCustomer("John Claus").AddProductsToCart(Store.GetProduct("Coca-cola"), 2);
         Store.GetCustomer("John Claus").AddProductsToCart(Store.GetProduct("Norway Herring"), 1);
@@ -35,16 +35,16 @@ internal class Program
         Store.GetCustomer("Peter Parker").AddProductsToCart(Store.GetProduct("Lay’s Cheese"), 5);
         Store.GetCustomer("Peter Parker").AddProductsToCart(Store.GetProduct("Coca-cola"), 2);
         Store.GetCustomer("Peter Parker").AddProductsToCart(Store.GetProduct("Aperol"), 1);
-      
 
-       Store.PrintCustomerInformation();
 
-        var options = new JsonSerializerOptions();
-        options.WriteIndented = true;
-        string productsJson = JsonSerializer.Serialize(Store.Products, options);
-        File.WriteAllText("products.json", productsJson);
-        string customersJson = JsonSerializer.Serialize(Store.Customers, options);
-        File.WriteAllText("customers.json", customersJson);
+        Store.PrintCustomerInformation();
+
+        //var options = new JsonSerializerOptions();
+        //options.WriteIndented = true;
+        //string productsJson = JsonSerializer.Serialize(Store.Products, options);
+        //File.WriteAllText("products.json", productsJson);
+        //string customersJson = JsonSerializer.Serialize(Store.Customers, options);
+        //File.WriteAllText("customers.json", customersJson);
 
 
 
