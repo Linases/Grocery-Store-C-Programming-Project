@@ -2,12 +2,13 @@
 using GroceryStore.Constants;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using GroceryStore.Core.Helpers;
 
 internal class Program
 {
     public static void Main(string[] args)
     {
-
+        
         Store.AddCustomer("John", "Doe", 22, "M", true, 0.02);
         Store.AddCustomer("Sam", "Brooks", 67, "F", true, 0.12);
         Store.AddCustomer("Alois", "Winter", 15, "M", false);
@@ -36,15 +37,18 @@ internal class Program
         Store.GetCustomer("Peter Parker").AddProductsToCart(Store.GetProduct("Coca-cola"), 2);
         Store.GetCustomer("Peter Parker").AddProductsToCart(Store.GetProduct("Aperol"), 1);
 
-
+        
         Store.PrintCustomerInformation();
 
-        //var options = new JsonSerializerOptions();
-        //options.WriteIndented = true;
-        //string productsJson = JsonSerializer.Serialize(Store.Products, options);
-        //File.WriteAllText("products.json", productsJson);
-        //string customersJson = JsonSerializer.Serialize(Store.Customers, options);
-        //File.WriteAllText("customers.json", customersJson);
+
+
+        var options = new JsonSerializerOptions()
+        { IncludeFields = true,WriteIndented = true };
+       
+        string productsJson = JsonSerializer.Serialize(Store.Products, options);
+        File.WriteAllText("products.json", productsJson);
+        string customersJson = JsonSerializer.Serialize(Store.Customers, options);
+        File.WriteAllText("customers.json", customersJson);
 
 
 

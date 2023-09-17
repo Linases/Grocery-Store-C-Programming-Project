@@ -3,15 +3,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace GroceryStore.Models
 {
     public class Drink : Product
     {
+        [JsonInclude]
         public bool IsAlcohol { get; set; }
-
-        double Volume { get; set; }
+        [JsonInclude]
+        public double Volume { get; set; }
 
         public override ProductCategories Category => ProductCategories.Drinks;
 

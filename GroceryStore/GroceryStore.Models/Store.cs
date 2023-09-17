@@ -14,9 +14,11 @@ namespace GroceryStore.Models
 {
     public static class Store
     {
-        public static HashSet<Customer> Customers { get; set; } = new HashSet<Customer>();
-        public static HashSet<Product> Products { get; set; } = new HashSet<Product>();
+        private static HashSet<Customer> _customers { get; set; } = new HashSet<Customer>();
+        private static HashSet<Product> _products { get; set; } = new HashSet<Product>();
 
+        public static HashSet<Customer> Customers { get { return _customers; } }
+        public static HashSet<Product> Products { get { return _products; } }
         public static void LoadCustomers()
         {
             JsonHelper.GetData<Customer>("customers.json");
@@ -24,12 +26,6 @@ namespace GroceryStore.Models
         public static void Loadproducts()
         {
             JsonHelper.GetData<Product>("products.json");
-        }
-
-        public static void AddCustomer()
-        {
-
-
         }
 
         public static void AddCustomer(string firstName, string lastName, int age, string sex, bool hasDiscountCard, double personalDiscount = 0)
@@ -51,6 +47,7 @@ namespace GroceryStore.Models
                 if (customer.FullName == fullName)
                 {
                     customer.UpdateName(newFirstName, newLastName);
+                    JsonHelper.SetData( Customers,"customers.json");
                 }
             }
         }
@@ -62,6 +59,7 @@ namespace GroceryStore.Models
                 if (customer.FullName == fullName)
                 {
                     return customer;
+                
                 }
             }
             throw new Exception("Customer not found: " + fullName);

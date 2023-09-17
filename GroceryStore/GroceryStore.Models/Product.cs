@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using GroceryStore.Constants;
 using System.Text.Json;
 using Microsoft.VisualBasic;
+using System.Text.Json.Serialization;
 
 namespace GroceryStore.Models
 {
@@ -17,9 +18,9 @@ namespace GroceryStore.Models
         public abstract ProductCategories Category { get; }
         public double Price { get; set; }
 
-        public int ExpirationDays = 1;
-
-        public bool AgeRestrictedProduct { get; set; } = false;
+       int ExpirationDays = 1;
+     
+       public bool AgeRestrictedProduct { get; set; } = false;
         public DateTime ExpirationDate
         {
             get

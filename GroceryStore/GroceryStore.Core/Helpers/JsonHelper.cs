@@ -10,18 +10,18 @@ namespace GroceryStore.Core.Helpers
     public static class JsonHelper
 
     {
-        public static T GetData<T>(string filePath)
+        public static T GetData<T>(string fileName)
         {
             try
             {
-                if (File.Exists(filePath))
+                if (File.Exists(fileName))
                 {
-                    string jsonString = File.ReadAllText(filePath);
+                    string jsonString = File.ReadAllText(fileName);
                     return JsonSerializer.Deserialize<T>(jsonString);
                 }
                 else
                 {
-                    throw new FileNotFoundException($"File not found: {filePath}");
+                    throw new FileNotFoundException($"File not found: {fileName}");
                 }
             }
             catch (Exception ex)
@@ -31,14 +31,14 @@ namespace GroceryStore.Core.Helpers
             }
         }
 
-        public static void SetData<T>(string filePath, T data)
+        public static void SetData<T>( T data,string fileName)
         {
             try
             {
                 var options = new JsonSerializerOptions();
                 options.WriteIndented = true;
-                string jsonString = JsonSerializer.Serialize(data, options);
-                File.WriteAllText(filePath, jsonString);
+                string jsonString = JsonSerializer.Serialize<T>(data, options);
+                File.WriteAllText(fileName, jsonString);
             }
             catch (Exception ex)
             {

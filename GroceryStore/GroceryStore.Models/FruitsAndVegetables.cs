@@ -3,13 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace GroceryStore.Models
 {
    public class FruitsAndVegetables : Product
     {
-        double Weight { get; set; }
+        [JsonInclude]
+        public double Weight { get; set; }
         public override ProductCategories Category => ProductCategories.FruitsAndVegetables;
 
         public FruitsAndVegetables(string name, double price, double weight, int expirationDays = 4 ) : base(name, price, expirationDays)

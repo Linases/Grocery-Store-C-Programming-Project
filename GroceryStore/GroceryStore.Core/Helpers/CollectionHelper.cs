@@ -13,14 +13,14 @@ namespace GroceryStore.Core.Helpers
         {
             {
                 customers.Add(customer);
-                JsonHelper.SetData<T>(jsonFilePath, customer);
+                JsonHelper.SetData<T>(customer, jsonFilePath );
             }
         }
         public static void AddProduct<T>(this HashSet<T> products,T product, string jsonFilePath)
         
         {
             products.Add(product);
-            JsonHelper.SetData<T>(jsonFilePath, product);
+            JsonHelper.SetData<T>(product, jsonFilePath);
         }
 
     }
