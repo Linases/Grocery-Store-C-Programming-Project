@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
  
 
@@ -13,14 +14,14 @@ namespace GroceryStore.Core.Helpers
         {
             {
                 customers.Add(customer);
-                JsonHelper.SetData<T>(customer, jsonFilePath );
+                JsonHelper.SetData(customer, jsonFilePath );
             }
         }
         public static void AddProduct<T>(this HashSet<T> products,T product, string jsonFilePath)
         
         {
             products.Add(product);
-            JsonHelper.SetData<T>(product, jsonFilePath);
+            JsonHelper.SetData(product, jsonFilePath);
         }
 
     }

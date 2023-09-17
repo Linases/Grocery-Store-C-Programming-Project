@@ -39,6 +39,28 @@ namespace GroceryStore.Models
         {
             return $"({Category}) {Name} {Price:C}, Exp. {ExpirationDate.ToString("dd.MM.yyyy")}";
         }
+
+        public string getProductInfo()
+        {
+            if (this is FruitsAndVegetables)
+            {
+                return ((FruitsAndVegetables)this).ToString();
+            }
+            if (this is Snacks)
+            {
+                return ((Snacks)this).ToString();
+            }
+            if (this is Fish)
+            {
+                return ((Fish)this).ToString();
+            }
+            if (this is Drink)
+            {
+                return ((Drink)this).ToString();
+            }
+     
+            return ToString();
+        }
     }
 }
 

@@ -1,7 +1,6 @@
 ﻿using GroceryStore.Models;
 using GroceryStore.Constants;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using GroceryStore.Core.Helpers;
 
 internal class Program
@@ -40,15 +39,12 @@ internal class Program
         
         Store.PrintCustomerInformation();
 
+        JsonHelper.SetData(Store.Customers, @"C:\Users\lina.seskiene\source\repos\Linases\Grocery-Store-C-Programming-Project\GroceryStore\GroceryStore\Resources\customers.json");
+        JsonHelper.SetData(Store.Products, @"C:\Users\lina.seskiene\source\repos\Linases\Grocery-Store-C-Programming-Project\GroceryStore\GroceryStore\Resources\products.json");
 
-
-        var options = new JsonSerializerOptions()
-        { IncludeFields = true,WriteIndented = true };
        
-        string productsJson = JsonSerializer.Serialize(Store.Products, options);
-        File.WriteAllText("products.json", productsJson);
-        string customersJson = JsonSerializer.Serialize(Store.Customers, options);
-        File.WriteAllText("customers.json", customersJson);
+
+
 
 
 

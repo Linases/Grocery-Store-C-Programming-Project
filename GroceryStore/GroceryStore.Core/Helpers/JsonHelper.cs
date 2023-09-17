@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.Json;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 namespace GroceryStore.Core.Helpers
@@ -17,7 +16,7 @@ namespace GroceryStore.Core.Helpers
                 if (File.Exists(fileName))
                 {
                     string jsonString = File.ReadAllText(fileName);
-                    return JsonSerializer.Deserialize<T>(jsonString);
+                    return JsonConvert.DeserializeObject<T>(jsonString);
                 }
                 else
                 {
@@ -31,13 +30,11 @@ namespace GroceryStore.Core.Helpers
             }
         }
 
-        public static void SetData<T>( T data,string fileName)
+        public static void SetData<T>(T data, string fileName)
         {
             try
             {
-                var options = new JsonSerializerOptions();
-                options.WriteIndented = true;
-                string jsonString = JsonSerializer.Serialize<T>(data, options);
+                string jsonString = JsonConvert.SerializeObject(data);
                 File.WriteAllText(fileName, jsonString);
             }
             catch (Exception ex)

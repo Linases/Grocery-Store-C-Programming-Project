@@ -114,7 +114,7 @@ namespace GroceryStore.Models
                 foreach (var group in groupedResult)
                 {
                     double productTotal = group.Key.Price * group.Count();
-                    cartValue += $"({group.Key} - {group.Count()}x - {productTotal:C}\n\t\t\t \t\t \t\t \t";
+                    cartValue += $"({group.Key.getProductInfo()} - {group.Count()}x - {productTotal:C}\n\t\t\t \t\t \t\t \t";
                     totalCartSum = totalCartSum + productTotal;
                     totalDiscountSum = totalCartSum * (1 - PersonalDiscount);
                 }
