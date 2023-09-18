@@ -20,35 +20,17 @@ namespace GroceryStore.Models
 
         private static HashSet<Customer> Customers { get { return _customers; } }
         private static HashSet<Product> Products { get { return _products; } }
-        //public static void LoadCustomers()
-        //{
-        //    JsonHelper.GetData<Customer>(@"C:\Users\lina.seskiene\source\repos\Linases\Grocery-Store-C-Programming-Project\GroceryStore\GroceryStore\Resources\customers.json");
-        //}
-        //public static void Loadproducts()
-        //{
-        //    JsonHelper.GetData<Product>(@"C:\Users\lina.seskiene\source\repos\Linases\Grocery - Store - C - Programming - Project\GroceryStore\GroceryStore\Resources\products.json");
-        //}
 
         public static void AddCustomer(string firstName, string lastName, int age, string sex, bool hasDiscountCard, double personalDiscount = 0)
         {
             Customer customer = new Customer(firstName, lastName, age, sex, hasDiscountCard, personalDiscount);
             CollectionHelper.AddCustomer(Customers, customer);
         }
+
         public static void AddProduct(Product product)
         {
             CollectionHelper.AddProduct(Products, product);
         }
-
-        //public static void UpdateCustomerName(string fullName, string newFirstName, string newLastName)
-        //{
-        //    foreach (var customer in Customers)
-        //    {
-        //        if (customer.FullName == fullName)
-        //        {
-        //            customer.UpdateName(newFirstName, newLastName);
-        //        }
-        //    }
-        //}
 
         public static void UpdateCustomer(string fullName, string newFirstName, string newLastName)
         {
@@ -68,25 +50,24 @@ namespace GroceryStore.Models
             {
                 if (customer.FullName == fullName)
                 {
-                    JsonHelper.SetData(Customers, @"C:\Users\lina.seskiene\source\repos\Linases\Grocery-Store-C-Programming-Project\GroceryStore\GroceryStore\Resources\customers.json");
                     return customer;
                 }
             }
             throw new Exception("Customer not found: " + fullName);
-
         }
+
         public static Product GetProduct(string productName)
         {
             foreach (var product in Products)
             {
                 if (product.Name == productName)
                 {
-                    JsonHelper.SetData(Products, @"C:\Users\lina.seskiene\source\repos\Linases\Grocery-Store-C-Programming-Project\GroceryStore\GroceryStore\Resources\products.json");
-                    return product;
+                   return product;
                 }
             }
             throw new Exception("Product not found: " + productName);
         }
+
         public static void UpdateDiscountCard(string fullName, bool hasDiscountCard)
         {
             foreach (var customer in Customers)
@@ -96,6 +77,12 @@ namespace GroceryStore.Models
                     customer.UpdateDiscount(hasDiscountCard);
                 }
             }
+        }
+
+        public static void AddProductsToCart(string fullName, string productName, int amount)
+        {
+            GetCustomer(fullName).AddProductsToCart(GetProduct(productName), amount);
+            JsonHelper.SetData(Customers, @"C:\Users\lina.seskiene\source\repos\Linases\Grocery-Store-C-Programming-Project\GroceryStore\GroceryStore\Resources\customers.json");
         }
         public static void PrintCustomerInformation()
         {

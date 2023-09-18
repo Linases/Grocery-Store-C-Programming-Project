@@ -1,1 +1,51 @@
-[{"IsAlcohol":false,"Volume":0.5,"Category":5,"Name":"Coca-cola","Price":1.12,"AgeRestrictedProduct":false,"ExpirationDate":"2023-10-18T00:00:00+03:00"},{"Weight":0.5,"Category":1,"Name":"Tomatoes","Price":0.99,"AgeRestrictedProduct":false,"ExpirationDate":"2023-09-22T00:00:00+03:00"},{"IsNoFat":false,"Category":4,"Name":"Lay’s Cheese","Price":2.49,"AgeRestrictedProduct":false,"ExpirationDate":"2023-12-17T00:00:00+02:00"},{"FishType":2,"Category":3,"Name":"Norway Herring","Price":4.55,"AgeRestrictedProduct":false,"ExpirationDate":"2023-09-19T00:00:00+03:00"},{"Category":2,"Name":"Chicken Nuggets","Price":4.99,"AgeRestrictedProduct":false,"ExpirationDate":"2023-09-19T00:00:00+03:00"},{"IsAlcohol":true,"Volume":0.75,"Category":5,"Name":"Aperol","Price":9.99,"AgeRestrictedProduct":true,"ExpirationDate":"2023-10-18T00:00:00+03:00"}]
+[
+  {
+    "IsAlcohol": false,
+    "Volume": 0.5,
+    "Category": 5,
+    "Name": "Coca-cola",
+    "Price": 1.12,
+    "AgeRestrictedProduct": false,
+    "ExpirationDate": "2023-10-18T00:00:00+03:00"
+  },
+  {
+    "Weight": 0.5,
+    "Category": 1,
+    "Name": "Tomatoes",
+    "Price": 0.99,
+    "AgeRestrictedProduct": false,
+    "ExpirationDate": "2023-09-22T00:00:00+03:00"
+  },
+  {
+    "AgeRestrictedProduct": false,
+    "Category": 4,
+    "ExpirationDate": "2023-12-17T00:00:00+02:00",
+    "IsNoFat": false,
+    "Name": "Lay’s Cheese",
+    "Price": 2.49
+  },
+  {
+    "FishType": 2,
+    "Category": 3,
+    "Name": "Norway Herring",
+    "Price": 4.55,
+    "AgeRestrictedProduct": false,
+    "ExpirationDate": "2023-09-19T00:00:00+03:00"
+  },
+  {
+    "Category": 2,
+    "Name": "Chicken Nuggets",
+    "Price": 4.99,
+    "AgeRestrictedProduct": false,
+    "ExpirationDate": "2023-09-19T00:00:00+03:00"
+  },
+  {
+    "IsAlcohol": true,
+    "Volume": 0.75,
+    "Category": 5,
+    "Name": "Aperol",
+    "Price": 9.99,
+    "AgeRestrictedProduct": true,
+    "ExpirationDate": "2023-10-18T00:00:00+03:00"
+  }
+]

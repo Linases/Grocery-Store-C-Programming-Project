@@ -24,16 +24,15 @@ internal class Program
         Store.UpdateDiscountCard("Ann Siemens", false);
         Store.UpdateCustomer("John Doe", "John", "Claus");
 
-        Store.GetCustomer("John Claus").AddProductsToCart(Store.GetProduct("Coca-cola"), 2);
-        Store.GetCustomer("John Claus").AddProductsToCart(Store.GetProduct("Norway Herring"), 1);
-        Store.GetCustomer("John Claus").AddProductsToCart(Store.GetProduct("Tomatoes"), 7);
-        Store.GetCustomer("Alois Winter").AddProductsToCart(Store.GetProduct("Tomatoes"), 3);
-        Store.GetCustomer("Sam Brooks").AddProductsToCart(Store.GetProduct("Chicken Nuggets"), 1);
-        Store.GetCustomer("Ann Siemens").AddProductsToCart(Store.GetProduct("Aperol"), 1);
-        Store.GetCustomer("Peter Parker").AddProductsToCart(Store.GetProduct("Lay’s Cheese"), 5);
-        Store.GetCustomer("Peter Parker").AddProductsToCart(Store.GetProduct("Coca-cola"), 2);
-        Store.GetCustomer("Peter Parker").AddProductsToCart(Store.GetProduct("Aperol"), 1);
-
+        Store.AddProductsToCart("John Claus", "Coca-cola", 2);
+        Store.AddProductsToCart("John Claus", "Norway Herring", 1);
+        Store.AddProductsToCart("John Claus", "Tomatoes", 7);
+        Store.AddProductsToCart("Alois Winter", "Tomatoes", 3);
+        Store.AddProductsToCart("Sam Brooks", "Chicken Nuggets", 1);
+        Store.AddProductsToCart("Ann Siemens", "Aperol", 1);
+        Store.AddProductsToCart("Peter Parker", "Lay’s Cheese", 5);
+        Store.AddProductsToCart("Peter Parker", "Coca-cola", 2);
+        Store.AddProductsToCart("Peter Parker", "Aperol", 1);
 
         Store.PrintCustomerInformation();
 
