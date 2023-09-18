@@ -54,7 +54,6 @@ namespace GroceryStore.Models
 
         public void AddProductsToCart<T>(T product, int amount) where T : Product 
         {
-
             try
             {
                 if (product.AgeRestrictedProduct && this.Age < 18)

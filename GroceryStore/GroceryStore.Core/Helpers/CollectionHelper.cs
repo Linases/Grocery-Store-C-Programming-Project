@@ -4,24 +4,24 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
- 
+
 
 namespace GroceryStore.Core.Helpers
 {
-   public static class CollectionHelper
+    public static class CollectionHelper
     {
-        public static void AddCustomer<T>(this HashSet<T> customers, T customer, string jsonFilePath)
+        public static void AddCustomer<T>(this ICollection<T> customers, T customer)
         {
             {
                 customers.Add(customer);
-                JsonHelper.SetData(customer, jsonFilePath );
+                JsonHelper.SetData(customers, @"C:\Users\lina.seskiene\source\repos\Linases\Grocery-Store-C-Programming-Project\GroceryStore\GroceryStore\Resources\customers.json");
             }
         }
-        public static void AddProduct<T>(this HashSet<T> products,T product, string jsonFilePath)
-        
+        public static void AddProduct<T>(this ICollection<T> products, T product)
+
         {
             products.Add(product);
-            JsonHelper.SetData(product, jsonFilePath);
+            JsonHelper.SetData(products, @"C:\Users\lina.seskiene\source\repos\Linases\Grocery-Store-C-Programming-Project\GroceryStore\GroceryStore\Resources\products.json");
         }
 
     }

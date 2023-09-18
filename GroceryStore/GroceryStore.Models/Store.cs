@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -17,37 +18,46 @@ namespace GroceryStore.Models
         private static HashSet<Customer> _customers { get; set; } = new HashSet<Customer>();
         private static HashSet<Product> _products { get; set; } = new HashSet<Product>();
 
-        public static HashSet<Customer> Customers { get { return _customers; } }
-        public static HashSet<Product> Products { get { return _products; } }
-        public static void LoadCustomers()
-        {
-            JsonHelper.GetData<Customer>("customers.json");
-        }
-        public static void Loadproducts()
-        {
-            JsonHelper.GetData<Product>("products.json");
-        }
+        private static HashSet<Customer> Customers { get { return _customers; } }
+        private static HashSet<Product> Products { get { return _products; } }
+        //public static void LoadCustomers()
+        //{
+        //    JsonHelper.GetData<Customer>(@"C:\Users\lina.seskiene\source\repos\Linases\Grocery-Store-C-Programming-Project\GroceryStore\GroceryStore\Resources\customers.json");
+        //}
+        //public static void Loadproducts()
+        //{
+        //    JsonHelper.GetData<Product>(@"C:\Users\lina.seskiene\source\repos\Linases\Grocery - Store - C - Programming - Project\GroceryStore\GroceryStore\Resources\products.json");
+        //}
 
         public static void AddCustomer(string firstName, string lastName, int age, string sex, bool hasDiscountCard, double personalDiscount = 0)
         {
-            {
-                Customer customer = new Customer(firstName, lastName, age, sex, hasDiscountCard, personalDiscount);
-                Customers.Add(customer);
-            }
+            Customer customer = new Customer(firstName, lastName, age, sex, hasDiscountCard, personalDiscount);
+            CollectionHelper.AddCustomer(Customers, customer);
         }
         public static void AddProduct(Product product)
         {
-            Products.Add(product);
+            CollectionHelper.AddProduct(Products, product);
         }
 
-        public static void UpdateCustomerName(string fullName, string newFirstName, string newLastName)
+        //public static void UpdateCustomerName(string fullName, string newFirstName, string newLastName)
+        //{
+        //    foreach (var customer in Customers)
+        //    {
+        //        if (customer.FullName == fullName)
+        //        {
+        //            customer.UpdateName(newFirstName, newLastName);
+        //        }
+        //    }
+        //}
+
+        public static void UpdateCustomer(string fullName, string newFirstName, string newLastName)
         {
             foreach (var customer in Customers)
             {
                 if (customer.FullName == fullName)
                 {
                     customer.UpdateName(newFirstName, newLastName);
-                    JsonHelper.SetData( Customers,"customers.json");
+                    JsonHelper.SetData(Customers, @"C:\Users\lina.seskiene\source\repos\Linases\Grocery-Store-C-Programming-Project\GroceryStore\GroceryStore\Resources\customers.json");
                 }
             }
         }
@@ -58,8 +68,8 @@ namespace GroceryStore.Models
             {
                 if (customer.FullName == fullName)
                 {
+                    JsonHelper.SetData(Customers, @"C:\Users\lina.seskiene\source\repos\Linases\Grocery-Store-C-Programming-Project\GroceryStore\GroceryStore\Resources\customers.json");
                     return customer;
-                
                 }
             }
             throw new Exception("Customer not found: " + fullName);
@@ -71,6 +81,7 @@ namespace GroceryStore.Models
             {
                 if (product.Name == productName)
                 {
+                    JsonHelper.SetData(Products, @"C:\Users\lina.seskiene\source\repos\Linases\Grocery-Store-C-Programming-Project\GroceryStore\GroceryStore\Resources\products.json");
                     return product;
                 }
             }

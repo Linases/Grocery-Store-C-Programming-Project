@@ -7,7 +7,7 @@ internal class Program
 {
     public static void Main(string[] args)
     {
-        
+
         Store.AddCustomer("John", "Doe", 22, "M", true, 0.02);
         Store.AddCustomer("Sam", "Brooks", 67, "F", true, 0.12);
         Store.AddCustomer("Alois", "Winter", 15, "M", false);
@@ -22,9 +22,7 @@ internal class Program
         Store.AddProduct(new Drink("Aperol", 9.99, 0.75, true));
 
         Store.UpdateDiscountCard("Ann Siemens", false);
-        Store.UpdateCustomerName("John Doe", "John", "Claus");
-
-
+        Store.UpdateCustomer("John Doe", "John", "Claus");
 
         Store.GetCustomer("John Claus").AddProductsToCart(Store.GetProduct("Coca-cola"), 2);
         Store.GetCustomer("John Claus").AddProductsToCart(Store.GetProduct("Norway Herring"), 1);
@@ -36,13 +34,10 @@ internal class Program
         Store.GetCustomer("Peter Parker").AddProductsToCart(Store.GetProduct("Coca-cola"), 2);
         Store.GetCustomer("Peter Parker").AddProductsToCart(Store.GetProduct("Aperol"), 1);
 
-        
+
         Store.PrintCustomerInformation();
 
-        JsonHelper.SetData(Store.Customers, @"C:\Users\lina.seskiene\source\repos\Linases\Grocery-Store-C-Programming-Project\GroceryStore\GroceryStore\Resources\customers.json");
-        JsonHelper.SetData(Store.Products, @"C:\Users\lina.seskiene\source\repos\Linases\Grocery-Store-C-Programming-Project\GroceryStore\GroceryStore\Resources\products.json");
-
-       
+    
 
 
 
