@@ -4,6 +4,8 @@ using System.Dynamic;
 using System.Globalization;
 using System.Transactions;
 using System.Xml.Linq;
+using GroceryStore.Core.Exceptions;
+
 
 namespace GroceryStore.Models
 {
@@ -13,16 +15,8 @@ namespace GroceryStore.Models
         public string LastName { get; set; }
         public int Age { get; set; }
         public string Sex { get; set; }
-
         public bool HasDiscountCard { get; set; }
 
-        private string DiscountCardToString
-        {
-            get
-            {
-                return HasDiscountCard ? "Yes" : "No";
-            }
-        }
         private double _personalDiscount;
         public double PersonalDiscount
         {
@@ -35,17 +29,9 @@ namespace GroceryStore.Models
                 _personalDiscount = value;
             }
         }
-        private string PercentageAsString
-        {
-            get
-            {
-                return (PersonalDiscount * 100).ToString("0.##") + "%";
-            }
-        }
         public string FullName => $"{FirstName} {LastName}";
 
-        public Product[] Cart { get; set; }
-        public int CartCount { get; set; }
+        public List<Product> Cart { get; set; }
 
         public Customer(string firstName, string lastName, int age, string sex, bool hasDiscountCard, double personalDiscount = 0.02)
         {
@@ -55,18 +41,45 @@ namespace GroceryStore.Models
             Sex = sex;
             HasDiscountCard = hasDiscountCard;
             PersonalDiscount = personalDiscount;
-            Cart = new Product[100];
-            CartCount = 0;
+            Cart = new List<Product>();
+        }
+        private string DiscountCardToString()
+        {
+            return HasDiscountCard ? "Yes" : "No";
+        }
+        private string ConvertDiscountCardToString()
+        {
+            return (PersonalDiscount * 100).ToString("0.##") + "%";
         }
 
-        public void AddProductsToCart(Product product, int amount)
+        public void AddProductsToCart<T>(T product, int amount) where T : Product 
         {
-            for (int i = 0; i < amount; i++)
+            try
             {
-                Cart[CartCount] = product;
-                CartCount++;
+                if (product.AgeRestrictedProduct && this.Age < 18)
+                {
+                    throw new UnderAgeException(this.FullName, product.Name);
+                }
+                else if (product.ExpirationDate < DateTime.Today)
+                {
+                    throw new ExpiredProductException(this.FullName, product.Name, product.ExpirationDate);
+                }
+                for (int i = 0; i < amount; i++)
+                {
+                    Cart.Add(product);
+                }
+            }
+
+            catch (UnderAgeException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (ExpiredProductException ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
+
         public void UpdateName(string newFirstName, string newLastName)
         {
             FirstName = newFirstName;
@@ -77,15 +90,14 @@ namespace GroceryStore.Models
             HasDiscountCard = hasDiscountCard;
             PersonalDiscount = personalDiscount;
         }
-
-        public string GetCustomerInfo()
+        public override string ToString()
         {
-            return $"| {FullName,-13} |  {Age,3} | {Sex,3} | {DiscountCardToString,12} | {PercentageAsString,16}| {GetCustomerCartInfo()}";
+            return $"| {FullName,-13} |  {Age,3} | {Sex,3} | {DiscountCardToString(),12} | {ConvertDiscountCardToString(),16}| {GetCustomerCartInfo()}";
         }
 
         private string GetCustomerCartInfo()
         {
-            if (CartCount == 0)
+            if (Cart.Count == 0)
             {
                 return "EMPTY";
             }
@@ -95,48 +107,17 @@ namespace GroceryStore.Models
                 string cartValue = string.Empty;
                 double totalDiscountSum = 0;
 
-                Product[] uniqueProducts = new Product[CartCount];
-                int uniqueProductsCount = 0;
+                var groupedResult = from s in Cart
+                                    group s by s;
 
-                for (int i = 0; i < CartCount; i++)
+                foreach (var group in groupedResult)
                 {
-                    bool existsInUniqueProducts = false;
-
-                    for (int j = 0; j < uniqueProductsCount; j++)
-                    {
-                        if (Cart[i] == uniqueProducts[j])
-                        {
-                            existsInUniqueProducts = true;
-                            break;
-                        }
-                    }
-
-                    if (existsInUniqueProducts == false)
-                    {
-                        uniqueProducts[uniqueProductsCount] = Cart[i];
-                        uniqueProductsCount++;
-                    }
-                }
-
-                for (int i = 0; i < uniqueProductsCount; i++)
-                {
-                    int amount = 0;
-
-                    for (int j = 0; j < CartCount; j++)
-                    {
-                        if (uniqueProducts[i] == Cart[j])
-                        {
-                            amount++;
-                        }
-                    }
-
-                    double productTotal = uniqueProducts[i].Price * amount;
-                    cartValue += $"({uniqueProducts[i].GetProductInfo()}- {amount}x - {productTotal:C}\n\t\t\t \t\t \t\t \t";
+                    double productTotal = group.Key.Price * group.Count();
+                    cartValue += $"({group.Key.getProductInfo()} - {group.Count()}x - {productTotal:C}\n\t\t\t \t\t \t\t \t";
                     totalCartSum = totalCartSum + productTotal;
                     totalDiscountSum = totalCartSum * (1 - PersonalDiscount);
                 }
-
-                cartValue += $"\n\t \t\t \t\t \t\t \t TOTAL = {totalCartSum:C} - DISCOUNT - {PercentageAsString} - {totalDiscountSum:C}";
+                cartValue += $"\n\t \t\t \t\t \t\t \t TOTAL = {totalCartSum:C} - DISCOUNT - " + ConvertDiscountCardToString() + $"  - {totalDiscountSum:C}";
                 return cartValue;
             }
         }

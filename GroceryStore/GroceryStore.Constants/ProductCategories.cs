@@ -2,47 +2,24 @@
 
 namespace GroceryStore.Constants;
 
-public static class ProductCategories
+public enum ProductCategories
 {
-    public enum Category
-    {
-        FruitsAndVegetables,
-        Meat,
-        Fish,
-        Snacks,
-        Drinks
-    }
-    public static string SelectCategory(Category category)
-    {
-        switch (category)
-        {
-            case Category.FruitsAndVegetables:
-                {
-                    return "Fruits & Vegetables";
-                }
-            case Category.Meat:
-                {
-                    return "Meat";
-                }
-            case Category.Snacks:
-                {
-                    return "Snacks";
-                }
-            case Category.Drinks:
-                {
-                    return "Drinks";
-                }
-            case Category.Fish:
-                { 
-                    return "Fish";
-                }
-                default:
-                {
-                    return "Unknown Category";
-                }
-        }
-
-    }
-
-
+    FruitsAndVegetables = 1,
+    Meat = 2,
+    Fish = 3,
+    Snacks = 4,
+    Drinks = 5
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

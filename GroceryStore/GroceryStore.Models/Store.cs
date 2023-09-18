@@ -1,71 +1,99 @@
 ﻿using GroceryStore.Constants;
+using GroceryStore.Core.Helpers;
 using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Diagnostics;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace GroceryStore.Models
 {
-    public class Store
+    public static class Store
     {
-        public Customer[] Customers { get; set; }
-        public Product[] Products { get; set; }
-        public int CustomerCount { get; set; }
-        public int ProductCount { get; set; }
+        private static HashSet<Customer> _customers { get; set; } = new HashSet<Customer>();
+        private static HashSet<Product> _products { get; set; } = new HashSet<Product>();
 
-        public Store()
-        {
-            Customers = new Customer[10];
-            Products = new Product[10];
-            CustomerCount = 0;
-            ProductCount = 0;
-        }
-        public void AddCustomer(string firstName, string lastName, int age, string sex, bool hasDiscountCard, double personalDiscount = 0)
-        {
-            {
-                Customer customer = new Customer(firstName, lastName, age, sex, hasDiscountCard, personalDiscount);
-                Customers[CustomerCount] = customer;
-                CustomerCount++;
-            }
-        }
-        public void AddProduct(string name, ProductCategories.Category categoryName, double price)
-        {
-            Product products = new Product(name, categoryName, price);
-            Products[ProductCount] = products;
-            ProductCount++;
-        }
-        public void UpdateCustomerName(string fullName, string newFirstName, string newLastName)
-        {
-            for (int i = 0; i < CustomerCount; i++)
+        private static HashSet<Customer> Customers { get { return _customers; } }
+        private static HashSet<Product> Products { get { return _products; } }
 
-                if (Customers[i].FullName == fullName)
-                {
-                    Customers[i].UpdateName(newFirstName, newLastName);
-                }
-        }
-        public void UpdateDiscountCard(string fullName, bool hasDiscountCard)
+        public static void AddCustomer(string firstName, string lastName, int age, string sex, bool hasDiscountCard, double personalDiscount = 0)
         {
-            for (int i = 0; i < CustomerCount; i++)
+            Customer customer = new Customer(firstName, lastName, age, sex, hasDiscountCard, personalDiscount);
+            CollectionHelper.AddCustomer(Customers, customer);
+        }
+
+        public static void AddProduct(Product product)
+        {
+            CollectionHelper.AddProduct(Products, product);
+        }
+
+        public static void UpdateCustomer(string fullName, string newFirstName, string newLastName)
+        {
+            foreach (var customer in Customers)
             {
-                if (Customers[i].FullName == fullName)
+                if (customer.FullName == fullName)
                 {
-                    Customers[i].UpdateDiscount(hasDiscountCard);
+                    customer.UpdateName(newFirstName, newLastName);
+                    JsonHelper.SetData(Customers, @"C:\Users\lina.seskiene\source\repos\Linases\Grocery-Store-C-Programming-Project\GroceryStore\GroceryStore\Resources\customers.json");
                 }
             }
         }
-        public void PrintCustomerInformation()
+
+        public static Customer GetCustomer(string fullName)
         {
-            Console.WriteLine(new string('-', 118));
+            foreach (var customer in Customers)
+            {
+                if (customer.FullName == fullName)
+                {
+                    return customer;
+                }
+            }
+            throw new Exception("Customer not found: " + fullName);
+        }
+
+        public static Product GetProduct(string productName)
+        {
+            foreach (var product in Products)
+            {
+                if (product.Name == productName)
+                {
+                   return product;
+                }
+            }
+            throw new Exception("Product not found: " + productName);
+        }
+
+        public static void UpdateDiscountCard(string fullName, bool hasDiscountCard)
+        {
+            foreach (var customer in Customers)
+            {
+                if (customer.FullName == fullName)
+                {
+                    customer.UpdateDiscount(hasDiscountCard);
+                }
+            }
+        }
+
+        public static void AddProductsToCart(string fullName, string productName, int amount)
+        {
+            GetCustomer(fullName).AddProductsToCart(GetProduct(productName), amount);
+            JsonHelper.SetData(Customers, @"C:\Users\lina.seskiene\source\repos\Linases\Grocery-Store-C-Programming-Project\GroceryStore\GroceryStore\Resources\customers.json");
+        }
+        public static void PrintCustomerInformation()
+        {
+            Console.WriteLine(new string('-', 138));
             Console.WriteLine("| Full Name     | Age  | Sex  |Has Discount |Personal Discount|              Cart                ");
-            Console.WriteLine(new string('-', 118));
+            Console.WriteLine(new string('-', 138));
 
-            for (int i = 0; i < CustomerCount; i++)
+            foreach (var customer in Customers)
             {
-                Console.WriteLine(Customers[i].GetCustomerInfo());
-                Console.WriteLine(new string('-', 118));
+                Console.WriteLine(customer);
+                Console.WriteLine(new string('-', 138));
             }
         }
     }

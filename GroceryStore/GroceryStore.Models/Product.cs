@@ -1,31 +1,65 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GroceryStore.Constants;
-
-
+using System.Text.Json;
+using Microsoft.VisualBasic;
+using System.Text.Json.Serialization;
 
 namespace GroceryStore.Models
 {
-    public class Product
+    public abstract class Product
     {
         public string Name { get; set; }
-        public ProductCategories.Category Category { get; set; }
+        public abstract ProductCategories Category { get; }
         public double Price { get; set; }
 
-        public Product(string name, ProductCategories.Category categoryName, double price)
+       int ExpirationDays = 1;
+     
+       public bool AgeRestrictedProduct { get; set; } = false;
+        public DateTime ExpirationDate
         {
-            this.Name = name;
-            this.Category = categoryName;
-            this.Price = price;
+            get
+            {
+                return DateTime.Today.AddDays(ExpirationDays);
+            }
+        }
+        public Product(string name, double price, int expirationDays)
+        {
+            Name = name;
+            Price = price;
+            ExpirationDays = expirationDays;
         }
 
-        public string GetProductInfo()
+        public override string ToString()
         {
-            return $"({Category}) {Name} {Price:C}";
+            return $"({Category}) {Name} {Price:C}, Exp. {ExpirationDate.ToString("dd.MM.yyyy")}";
+        }
+
+        public string getProductInfo()
+        {
+            if (this is FruitsAndVegetables)
+            {
+                return ((FruitsAndVegetables)this).ToString();
+            }
+            if (this is Snacks)
+            {
+                return ((Snacks)this).ToString();
+            }
+            if (this is Fish)
+            {
+                return ((Fish)this).ToString();
+            }
+            if (this is Drink)
+            {
+                return ((Drink)this).ToString();
+            }
+     
+            return ToString();
         }
     }
 }
